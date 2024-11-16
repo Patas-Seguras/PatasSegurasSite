@@ -1,0 +1,70 @@
+*{
+  font-family: "Geist Mono", monospace;
+  color: white;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  }
+html{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url(/assets/pexels-chris-f-38966-1144410.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+  
+  /* Estilo do container */
+.container {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+  width: 900px;
+  height: 570px;
+  position: relative;
+  }
+
+  /*Estilo dos conteudos*/
+.itens{
+  position: absolute;
+  top: 30px;
+}
+  /* Estilo do Título */
+h1 {
+  font-weight: 800;
+  font-size: 78px;
+  padding-left: 40px;
+  }
+  
+  /* Estilo do Parágrafo */
+p {
+  font-size: 18px;
+  width: 500px;
+  text-align: justify;
+  padding-left: 40px;
+  }
+  
+  /* Estilo do Botão */
+
+.botao{
+  color: black;
+  width: 100px;
+  padding: 6px 15px;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 3px;
+  border-style: groove;
+  margin-left: 760px;
+  }
+footer{
+  color: white;
+  text-shadow: 
+    -2px -2px 0 black;
+  position: fixed;
+  bottom: 0;
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  }
