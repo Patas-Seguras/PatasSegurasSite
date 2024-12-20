@@ -6,6 +6,7 @@
   font-style: normal;
   }
 body{
+  max-height: max-content;
   height: 100%;
   margin: 0;
   padding: 0;

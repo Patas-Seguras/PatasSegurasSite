@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Registro</title>
-
+    <title>Patas Seguras</title>
     <!--Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+
     <!--Script Bootstrap Todo os cdn que envolvem o uso do BP-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!--Google Fonts Fontes aqui!!-->
@@ -15,12 +16,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body>
-    <div class="container py-5">
-        <button class="btn btn-primary" onclick="voltar()">Voltar</button>
-        
-    </div>
 
-<script src="register-page.js"></script>
+<body >
+    <div class="container rounded-2 shadow-lg">
+        <div class="itens">
+            <h1>Patas Seguras</h1>
+            <p>Este é um site dedicado a denúncias de maus-tratos a animais, criado para facilitar a comunicação e a conscientização sobre a importância de proteger os direitos dos animais. O projeto foi desenvolvido por alunos do Grau técnico, com o objetivo de promover o bem-estar animal e oferecer uma plataforma acessível para que todos possam agir contra a crueldade.
+            </p>
+            <button class="botao rounded-pill button btn btn-secondary" data-bs-toogle="button" onclick="redirecionar()">Avançar</button>
+        </div>
+    </div>
+    <footer><i>Patas Seguras &copy;</i></footer>
+
+
+<script src="index.js"></script>
 </body>
 </html>
