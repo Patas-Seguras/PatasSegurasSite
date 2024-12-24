@@ -6,15 +6,14 @@
   font-style: normal;
   }
 body{
-  max-height: max-content;
-  height: 100%;
-  margin: 0;
-  padding: 0;
   background-image: url(/assets/pexels-chris-f-38966-1144410.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
+  max-height: max-content;
+  height: 100%;
+  margin: 0;
+  padding: 0;
   }
   
   /* Estilo do container */
