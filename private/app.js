@@ -16,7 +16,7 @@ db.connect((err) =>{
     }
 });
 //modulo para chamar o express
-const express = require('');express
+const express = require('express');
 //modulo para chamar a rota
 const path = require('path');
 //nome do express
