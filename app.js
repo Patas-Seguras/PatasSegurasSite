@@ -10,7 +10,7 @@ const app = express();
 const mysql = require('mysql2');
 //configs do handlebars
 app.engine('handlebars', engine());
-app.set('view engine', 'handlebars');
+app.set('views engine', 'handlebars');
 app.set('views', './views');
 //mais configs do handlebars
 app.engine('handlebars', engine({
@@ -19,8 +19,8 @@ app.engine('handlebars', engine({
     layoutsDir: path.join(__dirname, 'views/layouts'),
     partialsDir: path.join(__dirname, 'views/partials')
 }))
-app.set('view engine', 'handlebars');
-app.set('view',path.join(__dirname, 'public'))
+app.set('views engine', 'handlebars');
+app.set('views',path.join(__dirname, 'public'))
 //teste de conexão do db
 const db = mysql.createConnection({
     host: '127.0.0.1',
@@ -38,8 +38,8 @@ db.connect((err) =>{
 });
 
 //rota handlebars
-app.get('/', function(req, res){
-    res.render('main')
+app.get('/', (req, res) => {
+    res.render('home', {title: 'Patas Seguras'})
 })
 const port = 8080
 app.listen(port, () =>{
