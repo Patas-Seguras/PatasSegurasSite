@@ -18,7 +18,9 @@ app.engine('handlebars', engine({
     partialsDir: path.join(__dirname, 'views/partials'), // Pasta dos partials
 }));
 app.set('view engine', 'handlebars'); // Define o mecanismo de visualização
-app.set('views', path.join(__dirname, 'views')); // Define o diretório das views
+app.set('views', path.join(__dirname, '/views')); // Define o diretório das views
+const publicPath = path.join(__dirname, '/assets');
+app.use(express.static(path.join(__dirname, '/assets')));
 
 // Conexão com o MySQL
 const db = mysql.createConnection({
@@ -35,7 +37,6 @@ db.connect((err) => {
         console.log('Conectado ao banco de dados com sucesso!');
     }
 });
-
 // Rota para a página inicial
 app.get('/', (req, res) => {
     res.render('home', { title: 'Patas Seguras' }); // Renderiza a página 'home.handlebars'
