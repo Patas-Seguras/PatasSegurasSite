@@ -56,12 +56,3 @@ p {
   margin: 20px auto 0 auto; 
   display: block;
 }
-
-footer{
-  color: white;
-  text-shadow: -2px -2px 0 black;
-  position: fixed;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%); 
-  }

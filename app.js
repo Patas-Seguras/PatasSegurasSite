@@ -10,6 +10,13 @@ const mysql = require('mysql2');
 // Nome do Express
 const app = express();
 
+// Módulo para chamar o Bootstrap
+app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'));
+// Módulo da rota do CSS
+app.use('/css', express.static('./views/assets/css'));
+// Rota do JavaScript
+app.use('/js', express.static('./views/assets/js'));
+
 // Configuração do Handlebars
 app.engine('handlebars', engine({
     extname: '.handlebars', // Extensão dos arquivos Handlebars
@@ -19,13 +26,13 @@ app.engine('handlebars', engine({
 }));
 app.set('view engine', 'handlebars'); // Define o mecanismo de visualização
 app.set('views', path.join(__dirname, '/views')); // Define o diretório das views
-const publicPath = path.join(__dirname, '/assets');
-app.use(express.static(path.join(__dirname, '/assets')));
+app.use(express.static(path.join(__dirname, '/assets'))); // Pasta estática para assets
 
 // Conexão com o MySQL
 const db = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
+    port: '3306',
     password: '',
     database: 'db_patasseguras'
 });
@@ -37,9 +44,15 @@ db.connect((err) => {
         console.log('Conectado ao banco de dados com sucesso!');
     }
 });
+
 // Rota para a página inicial
 app.get('/', (req, res) => {
     res.render('home', { title: 'Patas Seguras' }); // Renderiza a página 'home.handlebars'
+});
+
+// Rota para a página de registro
+app.get('/register-page.handlebars', (req, res) => {
+    res.render('register-page', { title: 'Cadastro'}); // Renderiza a página 'register-page.handlebars'
 });
 
 // Inicia o servidor
