@@ -1,5 +1,9 @@
 // Módulo para chamar o Express
 const express = require('express');
+//Modulo para chamar o html
+const http = require('http');
+// Rota querystring
+const querystring = require('querystring');
 // Módulo para chamar o Handlebars
 const { engine } = require('express-handlebars');
 // Módulo para chamar a rota
@@ -27,7 +31,9 @@ app.engine('handlebars', engine({
 app.set('view engine', 'handlebars'); // Define o mecanismo de visualização
 app.set('views', path.join(__dirname, '/views')); // Define o diretório das views
 app.use(express.static(path.join(__dirname, '/assets'))); // Pasta estática para assets
-
+// Dados que serao manipulados via rotas
+app.use(express.json()); // O Express irá entender JSON
+app.use(express.urlencoded({ extended: true })); // O Express irá entender URL
 // Conexão com o MySQL
 const db = mysql.createConnection({
     host: '127.0.0.1',
@@ -53,6 +59,14 @@ app.get('/', (req, res) => {
 // Rota para a página de registro
 app.get('/register-page.handlebars', (req, res) => {
     res.render('register-page', { title: 'Cadastro'}); // Renderiza a página 'register-page.handlebars'
+});
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/views/home.handlebars');
+});
+app.post('/register' , (req, res) => {
+    const { nome, email, senha } = req.body;
+    req.headers;
+    res.send('Nome: ' + nome + ', E-mail: ' + email + ', Senha: ' + senha);
 });
 
 // Inicia o servidor
