@@ -1,18 +1,22 @@
 // Módulo para chamar o Express
 const express = require('express');
+//rota para a pasta db.js
+const { sequelize } = require('./models/db');
+//import bodyParses
+const bodyParser = require('body-parser');
 //Modulo para chamar o html
 const http = require('http');
 // Rota querystring
 const querystring = require('querystring');
 // Módulo para chamar o Handlebars
 const { engine } = require('express-handlebars');
-// Módulo para chamar a rota
+// export para chamar a rota
 const path = require('path');
-// Módulo para chamar o MySQL
+// export para chamar o MySQL
 const mysql = require('mysql2');
-
-// Nome do Express
+// Inicializa o Express
 const app = express();
+
 
 // Módulo para chamar o Bootstrap
 app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'));
@@ -32,24 +36,8 @@ app.set('view engine', 'handlebars'); // Define o mecanismo de visualização
 app.set('views', path.join(__dirname, '/views')); // Define o diretório das views
 app.use(express.static(path.join(__dirname, '/assets'))); // Pasta estática para assets
 // Dados que serao manipulados via rotas
-app.use(express.json()); // O Express irá entender JSON
-app.use(express.urlencoded({ extended: true })); // O Express irá entender URL
-// Conexão com o MySQL
-const db = mysql.createConnection({
-    host: '127.0.0.1',
-    user: 'root',
-    port: '3306',
-    password: '',
-    database: 'db_patasseguras'
-});
-
-db.connect((err) => {
-    if (err) {
-        console.error('Erro ao se conectar ao banco de dados:', err);
-    } else {
-        console.log('Conectado ao banco de dados com sucesso!');
-    }
-});
+app.use(bodyParser.json()); // O Express irá entender JSON
+app.use(bodyParser.urlencoded({ extended: true })); // O Express irá entender URL
 
 // Rota para a página inicial
 app.get('/', (req, res) => {
@@ -63,11 +51,9 @@ app.get('/register-page.handlebars', (req, res) => {
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/home.handlebars');
 });
-app.post('/register' , (req, res) => {
-    const { nome, email, senha } = req.body;
-    req.headers;
-    res.send('Nome: ' + nome + ', E-mail: ' + email + ', Senha: ' + senha);
-});
+app.post('db.patasseguras', (req, res) =>{
+    res.send('nome ' + req.body.nome + " email " + req.body.email + "senha" + req.body.senha)
+})
 
 // Inicia o servidor
 const port = 8080;
