@@ -2,15 +2,13 @@
     <h2>Registre-se</h2>
 </div>
 <div class="container shadow-lg rounded-2 bg-white justify-content-center align-self-center mt-5"> 
-    <form action="db.patasseguras" method="POST">
+    <form method="POST">
         <div>
-            <input type="text" class="form-control" name="nome" placeholder="Seu Nome">
+            <input type="text" class="form-control" name="name" placeholder="Seu Nome">
             <input type="email" class="form-control" name="email" placeholder="Seu Email">
-            <input type="email" class="form-control" name="email2" placeholder="Seu Email Novamente">
         </div>
         <div>
-            <input type="password" class="form-control" name="senha" placeholder="Sua senha">
-            <input type="password" class="form-control" name="senha2" placeholder="Sua senha novamente">
+            <input type="password" class="form-control" name="password" placeholder="Sua senha">
         </div>
             <button class="btn btn-primary" onclick="voltar()">Voltar</button>
             <button type="submit" class="btn btn-primary"   onclick="confirmar()">Entrar</button>

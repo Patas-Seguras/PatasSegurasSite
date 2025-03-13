@@ -1,7 +1,11 @@
-// Módulo para chamar o Express
+// exportador do Express
 const express = require('express');
-//rota para a pasta db.js
-const { sequelize } = require('./models/db');
+//bcrypt export
+const bcrypt = require('bcrypt');
+//export collection
+const collection = require('./models/db.js');
+///exportar session
+const session = require('express-session')
 //import bodyParses
 const bodyParser = require('body-parser');
 //Modulo para chamar o html
@@ -11,12 +15,9 @@ const querystring = require('querystring');
 // Módulo para chamar o Handlebars
 const { engine } = require('express-handlebars');
 // export para chamar a rota
-const path = require('path');
-// export para chamar o MySQL
-const mysql = require('mysql2');
+var path = require('path');
 // Inicializa o Express
 const app = express();
-
 
 // Módulo para chamar o Bootstrap
 app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'));
@@ -26,18 +27,17 @@ app.use('/css', express.static('./views/assets/css'));
 app.use('/js', express.static('./views/assets/js'));
 
 // Configuração do Handlebars
-app.engine('handlebars', engine({
-    extname: '.handlebars', // Extensão dos arquivos Handlebars
+app.engine('ejs', engine({
+    extname: '.ejs', // Extensão dos arquivos Handlebars
     defaultLayout: 'main', // Layout padrão
     layoutsDir: path.join(__dirname, 'views/layouts'), // Pasta dos layouts
     partialsDir: path.join(__dirname, 'views/partials'), // Pasta dos partials
 }));
-app.set('view engine', 'handlebars'); // Define o mecanismo de visualização
+app.set('view engine', 'ejs'); // Define o mecanismo de visualização
 app.set('views', path.join(__dirname, '/views')); // Define o diretório das views
 app.use(express.static(path.join(__dirname, '/assets'))); // Pasta estática para assets
-// Dados que serao manipulados via rotas
-app.use(bodyParser.json()); // O Express irá entender JSON
-app.use(bodyParser.urlencoded({ extended: true })); // O Express irá entender URL
+app.use(express.json())
+app.use(express.urlencoded({ extended: false })); // O Express irá entender URL
 
 // Rota para a página inicial
 app.get('/', (req, res) => {
@@ -45,15 +45,44 @@ app.get('/', (req, res) => {
 });
 
 // Rota para a página de registro
-app.get('/register-page.handlebars', (req, res) => {
+app.get('/register-page.ejs', (req, res) => {
     res.render('register-page', { title: 'Cadastro'}); // Renderiza a página 'register-page.handlebars'
 });
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/views/home.handlebars');
+app.get('/complaint-page.ejs', (req, res) => {
+    res.render('complaint-page', { title: 'Página de denuncia'}); // Renderiza a página 'complaint-page.handlebars'
 });
-app.post('db.patasseguras', (req, res) =>{
-    res.send('nome ' + req.body.nome + " email " + req.body.email + "senha" + req.body.senha)
-})
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/views/home.ejs');
+});
+
+app.get('/', (req, res) => {
+    res.render('register-page', { title: 'Cadastro'});
+});
+
+app.post('/register-page.ejs', async (req, res) =>{
+    const data = {
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    }
+    //checkando se usuario ja existe
+    const exitingUser = await collection.findOne({name: data.name});
+    if(exitingUser){
+        return res.send('User already exist');
+    }else {
+    //hashing the password
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(data.password, saltRounds);
+
+    data.password = hashedPassword;
+
+    const userData = await collection.insertMany(data);
+    console.log(userData);
+    
+    }
+});
+
 
 // Inicia o servidor
 const port = 8080;
