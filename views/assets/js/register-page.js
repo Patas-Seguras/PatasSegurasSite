@@ -1,3 +1,3 @@
 function voltar(){
-    window.location = "home.handlebars";
+    window.location = "home.ejs";
 }

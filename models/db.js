@@ -1,32 +1,28 @@
-// Import Sequelize
-const { Sequelize, DataTypes } = require('sequelize');
+const mongoose = require("mongoose");
+const connect = mongoose.connect('mongodb://localhost:27017/patasseguras_db');
 
-const sequelize = new Sequelize('db_patasseguras', 'root', '', { //conectando com o banco de dados via sequelize
-    host: '127.0.0.1',
-    dialect: 'mysql',
-    port: '3306'
-});
-sequelize.authenticate() //processo de verificação da conexão com o db
-    .then(() => {
-        console.log('Conectado ao banco de dados');
-    })
-    .catch(err => {
-        console.error('Erro ao se conectar ao banco de dados:', err);
-    });
-
-module.exports = {
-    sequelize: Sequelize,
-    Sequelize: sequelize 
-}
-//models Posts
-/*const Post = sequelize.define('Post', {
-    email: {
-        type: Sequelize.STRING;
-    },
-    senha: {
-        type: Sequelize.STRING;
-    }
+connect.then(() => {
+    console.log("Connected successfully to server");
+}).catch(() =>{
+    console.log("Error connecting to server");
 })
-Post.sync({force: true}) 
-*/
-//NÃO MEXER NESSAS LINHAS DE CODIGO!! se você quiser criar uma nova tabela, crie um novo arquivo e copie e cole esse código, mudando o nome da tabela e os campos que você deseja criar.
+ //Schema ↓
+ const loginSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
+ });
+
+ //collection part ↓
+ const collection = mongoose.model('users', loginSchema);
+
+ module.exports = collection;

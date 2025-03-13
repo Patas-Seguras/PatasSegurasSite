@@ -1,4 +1,4 @@
 function redirecionar(){
-    window.location = "/register-page.handlebars"
+    window.location = "/register-page.ejs"
     
 }
