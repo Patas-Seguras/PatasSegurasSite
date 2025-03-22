@@ -1,11 +1,34 @@
-<div class="container">
-    <h1>Patas Seguras</h1>
-    <h3>Denuncie Aqui ↓</h3>
-    <div>
-        <form>
-            <div>
-                <input type="checkbox" name="aaaaa" id="">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="complaint-page.css">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <h1 class="text-center mb-4">Patas Seguras</h1>
+        <h3 class="text-center mb-4">Denuncie Aqui ↓</h3>
+        <form method="post" action="    ">
+            <div class="mb-3">
+                <label for "complaint" class="form-label">Qual a denuncia?</label>
+                <select class="form-select">
+                    <option value="">Selecione um dos tipos de denuncia</option>
+                    <option value="abandono">Abandono</option>
+                    <option value="violencia">Violência</option>
+                    <option value="inadequaçãodeAbrigo">Má Condições de abrigo</option>
+                    <option value="faltadeAlimento">Falta de alimento/água</option>
+                    <option value="animaisSilvestres">Animais Silvestres em cativeiro</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <input type="text" id="location" placeholder="Localização do ocorrido...">
+            </div>
+            <div class="mb-3">
+                <textarea id="description" placeholder="Descreva o ocorrido..."></textarea>
+            </div>
+            <div class="form-check mb-3">
+                <input type="checkbox" id="anonny"></div>Desejo permanescer anonimo</input>
+            </div>
+            <div class="d-grid">
+                <input type="submit" class="btn btn-primary" value="Enviar">
             </div>
         </form>
     </div>
 </div>
+<script src="complaint-page.js"></script>
