@@ -78,8 +78,9 @@ app.post('/register-page.ejs', async (req, res) =>{
     data.password = hashedPassword;
 
     const userData = await collection.insertMany(data);
-    console.log(userData);
-    
+    console.log(userData);  
+
+    res.redirect('/complaint-page.ejs');
     }
 });
 
