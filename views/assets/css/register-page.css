@@ -1,0 +1,11 @@
+*{
+    font-family: "Geist Mono", monospace;
+    color: white;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
