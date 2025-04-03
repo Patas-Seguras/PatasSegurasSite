@@ -3,7 +3,11 @@ const express = require('express');
 //bcrypt export
 const bcrypt = require('bcrypt');
 //export collection
+<<<<<<< HEAD
 const  { collection, collection2 } = require('./models/db.js');
+=======
+const collection = require('./models/db.js');
+>>>>>>> fb310510f8732641de426be00fd9905622179582
 ///exportar session
 const session = require('express-session')
 //import bodyParses
@@ -60,9 +64,36 @@ app.get('/', (req, res) => {
     res.render('register-page', { title: 'Cadastro'});
 });
 
+<<<<<<< HEAD
 app.get('/ini', (req, res) => {
     res.render('home')
 })
+=======
+app.post('/register-page.ejs', async (req, res) =>{
+    const data = {
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    }
+    //checkando se usuario ja existe
+    const exitingUser = await collection.findOne({name: data.name});
+    if(exitingUser){
+        return res.send('User already exist');
+    }else {
+    //hashing the password
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(data.password, saltRounds);
+
+    data.password = hashedPassword;
+
+    const userData = await collection.insertMany(data);
+    console.log(userData);  
+
+    res.redirect('/complaint-page.ejs');
+    }
+});
+
+>>>>>>> fb310510f8732641de426be00fd9905622179582
 
 app.post('/register-page.ejs', async (req, res) =>{
     const data = {
