@@ -4,52 +4,45 @@
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
-  }
-body{
-  background-image: url(/PatasSegurasSite/views/img/pexels-chevanon-1108099.jpg) no-repeat center bottom/cover;
-  height: 100%;
-  }
-  
-  /* Estilo do container */
-.container {
-  max-width: 90%; 
-  max-height: 80%;
-  width: 900px;
-  height: 570px;
-  background-color: rgba(0, 0, 0, 0.6);
-  position: relative;
-  }
-
-  /*Estilo dos conteudos*/
-.itens{
-  margin-top: 20px;
-  padding-top: 50px;
 }
-  /* Estilo do Título */
-h1 {
-  font-weight: 800;
-  font-size: 78px;
-  padding-left: 123px;
+body{
+  background-image: url(/views/img/cao-engracado-engracado-beagle-andando-brincando-no-parque.png);
+}
+.container{
+    margin-top: 6.5%;
+    width: 60%;
+    background-color: rgba(0, 0, 0, 0.4);
   }
-  
-  /* Estilo do Parágrafo */
-p {
-  font-size: 18px;
-  width: 500px;
-  margin: auto;
-  text-align: center;
-  padding-left: 40px;
+  .itens{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 9%;
+    padding: 5%;
   }
-  
+  h1{
+    text-align: center;
+    font-size: 70px;
+    margin-bottom: 20px;
+    
+  }
+  p{
+    text-align: center;
+    
+  }
   /* Estilo do Botão */
-
   .botao {
-  width: 100px;
+  width: 20%;
   padding: 6px 15px;
   cursor: pointer;
   margin: 20px auto 0 auto; 
   display: block;
+  transition: all 0.3s ease;
 }
 .botao:hover{
-  transform:scale(1.1)
+  background-color: white;
+  color: black;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
