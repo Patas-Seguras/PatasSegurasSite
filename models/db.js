@@ -1,9 +1,5 @@
 const mongoose = require("mongoose");
 const connect = mongoose.connect('mongodb://localhost:27017/patasseguras_db');
-<<<<<<< HEAD
-=======
-
->>>>>>> fb310510f8732641de426be00fd9905622179582
 connect.then(() => {
     console.log("Connected successfully to server");
 }).catch(() =>{
@@ -23,10 +19,9 @@ connect.then(() => {
         type: String,
         required: true
     }
- });
+});
 
-<<<<<<< HEAD
- const complaintSchema = new mongoose.Schema({
+const complaintSchema = new mongoose.Schema({
     whichComplaint: {
         type: String,
         required: true
@@ -47,14 +42,8 @@ connect.then(() => {
         type: Date,
         default: Date.now
     }
- });
+});
  //collection part ↓
- const collection = mongoose.model('users', loginSchema);
- const collection2 = mongoose.model('complaint', complaintSchema);
- module.exports = { collection, collection2};
-=======
- //collection part ↓
- const collection = mongoose.model('users', loginSchema);
-
- module.exports = collection;
->>>>>>> fb310510f8732641de426be00fd9905622179582
+const collection = mongoose.model('users', loginSchema);
+const collection2 = mongoose.model('complaint', complaintSchema);
+module.exports = { collection, collection2};
