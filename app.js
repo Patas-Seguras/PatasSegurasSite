@@ -6,8 +6,6 @@ const bcrypt = require('bcrypt');
 const  { collection, collection2 } = require('./models/db.js');
 ///exportar session
 const session = require('express-session')
-//import bodyParses
-const bodyParser = require('body-parser');
 //Modulo para chamar o html
 const http = require('http');
 // Rota querystring
@@ -34,11 +32,11 @@ app.engine('ejs', engine({
     partialsDir: path.join(__dirname, 'views/partials'), // Pasta dos partials
 }));
 app.set('view engine', 'ejs'); // Define o mecanismo de visualização
+app.use('/img', express.static(path.join(__dirname, 'views/img')));
 app.set('views', path.join(__dirname, '/views')); // Define o diretório das views
 app.use(express.static(path.join(__dirname, '/assets'))); // Pasta estática para assets
 app.use(express.json())
 app.use(express.urlencoded({ extended: false })); // O Express irá entender URL
-
 // Rota para a página inicial
 app.get('/', (req, res) => {
     res.render('home', { title: 'Patas Seguras' }); // Renderiza a página 'home.handlebars'
