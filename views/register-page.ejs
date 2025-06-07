@@ -1,17 +1,26 @@
-<div class="mb-4 text-center">
-    <h2>Registre-se</h2>
-</div>
-<div class="container shadow-lg rounded-2 bg-white justify-content-center align-self-center mt-5"> 
+<div class="container">
+    <div class="row mt-5 mb-5 justify-content-center">
+        <div class="col-12 text-center">
+            <h2>Registre-se</h2>
+        </div>
+    </div>
     <form method="POST">
-        <div>
-            <input type="text" class="form-control" name="name" placeholder="Seu Nome">
-            <input type="email" class="form-control" name="email" placeholder="Seu Email">
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <input type="text" class="form-control mb-3" id="name" name="name" placeholder="Digite seu Email">
+                <input type="email" class="form-control mb-3" id="email" name="email" placeholder="Digite seu Email novamente">
+            </div>
         </div>
-        <div>
-            <input type="password" class="form-control" name="password" placeholder="Sua senha">
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <input type="password" class="form-control mb-3" id="inputPassword" name="password" placeholder="Digite sua senha">
+            </div>
         </div>
-            <button class="btn btn-primary" onclick="voltar()">Voltar</button>
-            <button type="submit" class="btn btn-primary"   onclick="confirmar()">Entrar</button>
-    </form>   
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <button type="submit" class="btn btn-primary active" onclick="confirmar()">Registrar</button>
+            </div>
+        </div>
+    </form>
 </div>
 
