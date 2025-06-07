@@ -6,7 +6,7 @@ connect.then(() => {
     console.log("Error connecting to server");
 })
  //Schema ↓
- const loginSchema = new mongoose.Schema({
+const loginSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
