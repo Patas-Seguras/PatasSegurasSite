@@ -2,15 +2,12 @@ const mongoose = require("mongoose");
 const connect = mongoose.connect('mongodb://localhost:27017/patasseguras_db');
 connect.then(() => {
     console.log("Connected successfully to server");
-}).catch(() =>{
-    console.log("Error connecting to server");
+}).catch((err) =>{
+    console.error("Error connecting to server", err);
+    console.error("details: ", err.mensage);
 })
  //Schema ↓
 const loginSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
     email: {
         type: String,
         required: true
