@@ -42,16 +42,16 @@ app.get('/', (req, res) => {
     res.render('home', { title: 'Patas Seguras' }); // Renderiza a página 'home.handlebars'
 });
 
+app.get('/complaint-page', (req, res) => {
+    res.render('complaint-page', { title: 'Página de denuncia'}); // Renderiza a página 'complaint-page.handlebars'
+});
 // Rota para a página de registro
 app.get('/register-page', (req, res) => {
-    res.render('register-page.ejs', { title: 'Cadastro'}); // Renderiza a página 'register-page.handlebars'
-});
-app.get('/complaint-page', (req, res) => {
-    res.render('complaint-page.ejs', { title: 'Página de denuncia'}); // Renderiza a página 'complaint-page.handlebars'
+    res.render('register-page', { title: 'Cadastro'}); // Renderiza a página 'register-page.handlebars'
 });
 
 app.get('/home', (req, res) => {
-    res.render('home.ejs')
+    res.render('home')
 })
 
 
