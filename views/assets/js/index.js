@@ -1,4 +1,4 @@
 function redirecionar(){
-    window.location.href = "/register-page.ejs"
+    window.location.href = "/complaint-page"
     
 }
