@@ -1,22 +1,20 @@
-<link rel="stylesheet" href="complaint-page.css">
-<div class="container mt-5">
+<link rel="stylesheet" href="css/complaint-page.css">
+<div class="container bg-white shadow mt-5">
     <div class="row justify-content-center">
-        <h1 class="text-center mb-4">Patas Seguras</h1>
-        <h3 class="text-center mb-4">Denuncie Aqui ↓</h3>
+        <h1 class="text-center text-black mb-4">Patas Seguras</h1>
+        <h3 class="text-center text-black mb-4">Denuncie Aqui ↓</h3>
         <form method="post" action="    ">
             <div class="mb-3">
-                <label for "complaint" class="form-label">Qual a denuncia?</label>
-                <select class="form-select" id="whichComplaint" name="whichComplaint">
-                    <option value="">Selecione um dos tipos de denuncia</option>
-                    <option value="abandono">Abandono</option>
-                    <option value="violencia">Violência</option>
-                    <option value="inadequaçãodeAbrigo">Má Condições de abrigo</option>
-                    <option value="faltadeAlimento">Falta de alimento/água</option>
-                    <option value="animaisSilvestres">Animais Silvestres em cativeiro</option>
+                <select class="form-label text-black" id="whichComplaint" name="whichComplaint">
+                    <option class="text-center text-black value="abandono">Abandono</option>
+                    <option class="text-center text-black value="violencia">Violência</option>
+                    <option class="text-center text-black value="inadequaçãodeAbrigo">Má Condições de abrigo</option>
+                    <option class="text-center text-black value="faltadeAlimento">Falta de alimento/água</option>
+                    <option class="text-center text-black value="animaisSilvestres">Animais Silvestres em cativeiro</option>
                 </select>
             </div>
             <div class="mb-3">
-                <input type="text" id="location" name="location" placeholder="Localização do ocorrido...">
+                <input type="text" id="location" name="location" class="form-label" placeholder="Localização do ocorrido...">
             </div>
             <div class="mb-3">
                 <textarea id="description" name="description" placeholder="Descreva o ocorrido..."></textarea>
