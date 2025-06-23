@@ -1,7 +1,6 @@
-<header class="header py-2 px-4 text-white d-flex align-items-center justify-content-between">
-<img src="/img/patasseglogo.png" alt="Logo" class="logo img-fluid">
+<header class="header py-2 px-4 text-white shadow-sm d-flex align-items-center justify-content-between">
+<img src="/img/patasseglogo.png" alt="Logo" onclick="gohome()" class="logo img-fluid">
 <nav class="nav-container d-flex gap-3">
-    <div class="link"><a href="/home">Início</a></div>
     <div class="link"><a href="/about">Sobre</a></div>
     <div class="link"><a href="/register-page">Registre-se</a></div>
     <div class="link"><a href="/contact">Contato</a></div>
@@ -58,4 +57,8 @@
     }
 }
 </style>
-
+<script>
+function gohome(){
+    location.href = "/home"
+}
+</script>
