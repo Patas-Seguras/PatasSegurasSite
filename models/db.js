@@ -15,7 +15,7 @@ try {
     await sequelize.authenticate();
     console.log('Conexão bem-sucedida ao MySQL via Sequelize!');
 } catch (error) {
-    console.error('Erro ao conectar ao MySQL:', error.message);
+    console.error('Erro ao conectar ao MySQL:', error);
 }
 })();
 
@@ -46,7 +46,7 @@ description: {
 },
 anonymous: {
     type: DataTypes.BOOLEAN,
-    defaultValue: false
+    defaultValue: true
 }
 });
 
