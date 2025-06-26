@@ -1,46 +1,63 @@
-const mongoose = require("mongoose");
-const connect = mongoose.connect('mongodb://localhost:27017/patasseguras_db');
-connect.then(() => {
-    console.log("Connected successfully to server");
-}).catch((err) =>{
-    console.error("Error connecting to server", err);
-    console.error("details: ", err.mensage);
-})
- //Schema ↓
-const loginSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    }
+const { Sequelize, DataTypes } = require('sequelize');
+
+const sequelize = new Sequelize('patasseguras_db', 'root', '', {
+host: 'localhost',
+port: 3306,
+dialect: 'mysql',
+dialectOptions: {
+    connectTimeout: 60000 
+}
 });
 
-const complaintSchema = new mongoose.Schema({
-    whichComplaint: {
-        type: String,
-        required: true
-    },
-    location: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String,
-        required: true
-    },
-    anonymous: {
-        type: Boolean, //Quando o conteudo for checkbox, o tipo é boolean
-        default: false
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    }
+(async () => {
+try {
+    console.log("Conectando ao MySQL...")
+    await sequelize.authenticate();
+    console.log('Conexão bem-sucedida ao MySQL via Sequelize!');
+} catch (error) {
+    console.error('Erro ao conectar ao MySQL:', error.message);
+}
+})();
+
+const Users = sequelize.define('Users', {
+email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true
+},
+pass_word: {
+    type: DataTypes.STRING,
+    allowNull: false
+}
 });
- //collection part ↓
-const collection = mongoose.model('users', loginSchema);
-const collection2 = mongoose.model('complaint', complaintSchema);
-module.exports = { collection, collection2};
+
+const Complaint = sequelize.define('Complaint', {
+whichComplaint: {
+    type: DataTypes.STRING,
+    allowNull: false
+},
+location: {
+    type: DataTypes.STRING,
+    allowNull: false
+},
+description: {
+    type: DataTypes.TEXT,
+    allowNull: false
+},
+anonymous: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+}
+});
+
+// Sincroniza os modelos com o banco de dados
+/*(async () => {
+  await sequelize.sync({ force: true }); // Use `force: true` apenas para testes (apaga e recria as tabelas)
+console.log('Tabelas sincronizadas!');
+})();
+*/
+module.exports = {
+    sequelize,
+    Users,
+    Complaint
+};

@@ -2,8 +2,6 @@
 const express = require('express');
 //bcrypt export
 const bcrypt = require('bcrypt');
-//export collection
-const  { collection, collection2 } = require('./models/db.js');
 ///exportar session
 const session = require('express-session')
 //Modulo para chamar o html
@@ -16,13 +14,13 @@ const { engine } = require('express-handlebars');
 var path = require('path');
 // Inicializa o Express
 const app = express();
-
 // Módulo para chamar o Bootstrap
 app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'));
 // Módulo da rota do CSS
 app.use('/css', express.static('./views/assets/css'));
 // Rota do JavaScript
 app.use('/js', express.static('./views/assets/js'));
+const  { Users, Complaint } = require('./models/db.js');
 
 // Configuração do Handlebars
 app.engine('ejs', engine({
@@ -36,7 +34,7 @@ app.use('/img', express.static(path.join(__dirname, 'views/img')));
 app.set('views', path.join(__dirname, '/views')); // Define o diretório das views
 app.use(express.static(path.join(__dirname, '/assets'))); // Pasta estática para assets
 app.use(express.json())
-app.use(express.urlencoded({ extended: false })); // O Express irá entender URL
+app.use(express.urlencoded({ extended: true })); // O Express irá entender URL
 // Rota para a página inicial
 app.get('/', (req, res) => {
     res.render('home', { title: 'Patas Seguras' }); // Renderiza a página 'home.handlebars'
@@ -51,27 +49,46 @@ app.get('/register-page', (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-    res.render('home')
+    res.render('home');
 })
 
+app.post('/register-page', async (req, res) => {
+    console.log('req.body:', req.body);
+try {
+    const { email, password } = req.body;
 
-
-app.post('/complaint-page.ejs', async (req, res) =>{
-    const data = {
-        whichComplaint: req.body.whichComplaint,
-        location: req.body.location,
-        description: req.body.description,
-        anonymous: req.body.anonymous === 'on'
-    };
-    
-    try{
-        const complaintData = await collection2.insertMany(data);
-        console.log(complaintData);
-        res.redirect('/complaint-page.ejs');    
-    }catch(err){
-        console.log('Erro ao inserir denúncia', err);
-        res.status(500).send('Erro ao registrar denúncia');
+    // Validação básica
+    if (!email || !password) {
+        return res.status(400).send('Todos os campos são obrigatórios.');
     }
+
+    // criando variavel de usuario exintente e usando o comando findone para varredura no banco de dados, onde se email for encontrado, dá erro
+    const existingUser = await Users.findOne({ where: { email } });
+    if (existingUser) {
+        return res.status(400).send('Este e-mail já está registrado.');
+    }
+
+    // Hashing da senha
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    //comando para criar usuario e enviar para o banco de dados
+    await Users.create({ email, pass_word: hashedPassword });
+
+    res.status(201).render('home');
+} catch (error) {
+    console.error('Erro ao registrar usuário:', error.message);
+    res.status(500).send('Erro interno no servidor.');
+}
+});
+
+
+app.post('/complaint-page', async (req, res) =>{
+    try{
+        const {whichComplaint, location, description, anonymous} = req.body
+    }catch{
+
+    }
+
 });
 
 // Inicia o servidor
@@ -79,36 +96,3 @@ const port = 8080;
 app.listen(port, () => {
     console.log('Servidor iniciado na porta: ' + port);
 });
-app.post('/register-page', async (req, res) =>{
-    try{
-        const data = {
-            email: req.body.email,
-            password: req.body.password,
-            passwordAgain: req.body.passwordAgain
-        }
-        if ( req.body.password != req.body.passwordAgain){
-            res.send(`<script>
-                alert("As senhas não coincidem");
-                window.location.href = "/register-page"; // Redireciona após o alerta
-            </script>`)
-        } else {
-        //hashing the password
-            const saltRounds = 5;
-            const hashedPassword = await bcrypt.hash(data.password, saltRounds);
-
-            data.password = hashedPassword;
-
-            const userData = await collection.insertOne({
-                email: data.email,
-                password: hashedPassword
-            });
-            console.log(userData);
-
-            res.redirect('/complaint-page');
-        }
-    }catch (error) {
-        console.error("Erro ao conectar o usuário: ", error);
-        res.status(500).send("Erro interno no servidor")
-    }
-    
-}); 
