@@ -49,7 +49,7 @@ app.get('/register-page', (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-    res.render('home');
+    res.render('home', { title: 'Patas Seguras' });
 })
 
 app.post('/register-page', async (req, res) => {
@@ -81,15 +81,6 @@ try {
 }
 });
 
-
-app.post('/complaint-page', async (req, res) =>{
-    try{
-        const {whichComplaint, location, description, anonymous} = req.body
-    }catch{
-
-    }
-
-});
 
 // Inicia o servidor
 const port = 8080;
