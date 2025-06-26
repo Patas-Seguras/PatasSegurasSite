@@ -55,19 +55,22 @@ app.get('/home', (req, res) => {
 app.post('/register-page', async (req, res) => {
     console.log('req.body:', req.body);
 try {
-    const { email, password } = req.body;
+    const { email, password, passwordAgain } = req.body;
 
     // Validação básica
-    if (!email || !password) {
+    if (!email || !password || !passwordAgain) {
         return res.status(400).send('Todos os campos são obrigatórios.');
     }
 
+    if (password !== passwordAgain) {
+        console.error('Erro, as senhas não coincidem.')
+        return res.status(400).send('As senhas não coincidem.');
+    }
     // criando variavel de usuario exintente e usando o comando findone para varredura no banco de dados, onde se email for encontrado, dá erro
     const existingUser = await Users.findOne({ where: { email } });
     if (existingUser) {
         return res.status(400).send('Este e-mail já está registrado.');
     }
-
     // Hashing da senha
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -79,6 +82,22 @@ try {
     console.error('Erro ao registrar usuário:', error.message);
     res.status(500).send('Erro interno no servidor.');
 }
+});
+
+app.post('/complaint-page', async (req, res) => {
+    try {
+        const {whichComplaint, location, description, anonymous} = req.body;
+
+        if(!whichComplaint || !location || !description){
+            return res.status(400).send("Os campos obrigatórios precisam ser preenchidos.")
+        }
+        await Complaint.create({whichComplaint, location, description, anonymous});
+        
+        res.status(201).render('home');
+    } catch (error) {
+        console.error('Erro no envio das denúncias: ', error.message);
+        res.status(500).send('Erro interno no servidor, por favor retorne a tela anterior.')
+    }
 });
 
 
