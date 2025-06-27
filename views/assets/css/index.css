@@ -9,6 +9,8 @@ body {
   background-color: rgba(0, 0, 0, 0.4);
   width: 60%;
   margin: 5% auto;
+}
+img{
   border-radius: 1rem;
 }
 .itens {
@@ -23,12 +25,29 @@ p {
 }
 .botao {
   width: 20%;
-  padding: 1% 5%;
+  padding: 2% 3%;
   cursor: pointer;
-  margin-top: 3%; 
+  margin: auto;
   transition: all 0.3s ease;
 }
 .botao:hover {
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 800px){
+  body{
+    background-size: 200vh;
+  }
+  .container{
+    font-size: x-small;
+  }
+  img{
+    border-radius: 5px;
+    width: 50px;
+  }
+  .botao{
+    font-size: smaller;
+    padding: 2% 4%;
+  }
 }
