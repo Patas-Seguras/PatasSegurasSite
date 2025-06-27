@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="css/complaint-page.css">
-<div class="container bg-white shadow mt-5">
+<div class="container shadow mt-5">
     <div class="row justify-content-center">
         <h1 class="text-center mb-4">Patas Seguras</h1>
         <h3 class="text-center mb-4">Denuncie Aqui ↓</h3>
@@ -8,19 +8,20 @@
                 <select class="form-label text-black" id="whichComplaint" name="whichComplaint">
                     <option class="text-center text-black value="abandono">Abandono</option>
                     <option class="text-center text-black value="violencia">Violência</option>
-                    <option class="text-center text-black value="inadequaçãodeAbrigo">Má Condições de abrigo</option>
+                    <option class="text-center text-black value="ambienteInsalubre">Ambiente insalubre</option>
                     <option class="text-center text-black value="faltadeAlimento">Falta de alimento/água</option>
                     <option class="text-center text-black value="animaisSilvestres">Animais Silvestres em cativeiro</option>
+                    <option class="text-center text-black value="abusoSexual">Abuso sexual</option>
                 </select>
             </div>
             <div class="mb-3">
-                <input type="text" id="location" name="location" class="form-label" placeholder="Localização do ocorrido...">
+                <input type="text" id="location" name="location" class="form-label text-black" placeholder="Localização do ocorrido...">
             </div>
             <div class="mb-3">
-                <textarea id="description" name="description" placeholder="Descreva o ocorrido..."></textarea>
+                <textarea id="description" name="description" class="form-label text-black" placeholder="Descreva o ocorrido..."></textarea>
             </div>
             <div class="form-check mb-3">
-                <input type="checkbox" id="anonymous" name="anonymous"></div>Desejo permanescer anonimo</input>
+                <input type="checkbox" id="anonymous" class="form-label" name="anonymous"></div>Desejo permanecer anonimo</input>
             </div>
             <div class="d-grid">
                 <input type="submit" class="btn btn-primary" value="Enviar">
