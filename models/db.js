@@ -1,3 +1,4 @@
+const { name } = require('ejs');
 const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize('patasseguras_db', 'root', '', {
@@ -36,6 +37,14 @@ whichComplaint: {
     type: DataTypes.STRING,
     allowNull: false
 },
+name: {
+    type: DataTypes.STRING,
+    allowNull: false
+},
+photo: {
+    type: DataTypes.BLOB,
+    allowNull: false
+},
 location: {
     type: DataTypes.STRING,
     allowNull: false
@@ -56,6 +65,7 @@ anonymous: {
 console.log('Tabelas sincronizadas!');
 })();
 */
+
 module.exports = {
     sequelize,
     Users,
