@@ -86,12 +86,12 @@ try {
 
 app.post('/complaint-page', async (req, res) => {
     try {
-        const {whichComplaint, location, description, anonymous} = req.body;
+        const {whichComplaint, name, photos, location, description, anonymous} = req.body;
 
         if(!whichComplaint || !location || !description){
             return res.status(400).send("Os campos obrigatórios precisam ser preenchidos.")
         }
-        await Complaint.create({whichComplaint, location, description, anonymous});
+        await Complaint.create({whichComplaint, name, photos, location, description, anonymous});
         
         res.status(201).render('home');
     } catch (error) {
