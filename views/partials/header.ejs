@@ -1,64 +1,67 @@
-<header class="header py-2 px-4 text-white shadow-sm d-flex align-items-center justify-content-between">
-<img src="/img/patasseglogo.png" alt="Logo" onclick="gohome()" class="logo img-fluid">
-<nav class="nav-container d-flex gap-3">
+<header class="header">
+    <div>
+        <h1 class="gradient-logo">
+            <span class="line1">PATAS</span>
+            <span class="line2">SEGURAS</span>
+        </h1>
+    </div>
+</header>
+<nav class="nav-container shadow-lg">
     <div class="link"><a href="/about">Sobre</a></div>
+    <div class="link"><a href="/home">Início</a></div>
     <div class="link"><a href="/register-page">Registre-se</a></div>
     <div class="link"><a href="/contact">Contato</a></div>
+    <div class="link"><a href="/ong-map">ONGs</a></div>
 </nav>
-</header>
-
 <style>
+.header * {
+    margin: 0;
+}
 .header {
-    background: #ffffff;
-    box-shadow: 0 0.2% 1% rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 999;
-}
-.link a {
-    color: #000000;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    display: inline-block;
-    transition: all 0.3s ease;
-    border-radius: 0.5rem;
-}
-.link a:hover {
+    text-align: center;
     background-color: #0d6efd;
-    color: #ffffff;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0;
 }
 .nav-container {
     display: flex;
+    background-color: #fff;
+    justify-content: center;
+    gap: 2rem;
     flex-wrap: wrap;
-}
-.logo {
-    height: 50px;
-    transition: transform 0.2s ease;
-    cursor: pointer;
-}
-.logo:hover {
-    transform: scale(1.1);
+    padding: 1%;
 }
 
-@media (max-width: 768px) {
-    .header {
+.link a {
+    color: #333333;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    padding: 0.5rem;
+    border-radius: 3px;
+}
+
+.link a:hover,
+.link a:focus {
+    color: #0d6efd;
+    background: #e7f1ff ;
+}
+.gradient-logo {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    }
-    .nav-container {
-    margin-top: 0.5rem;
-    justify-content: center;
-    }
-    .logo {
-    position: static;
-    margin-bottom: 0.5rem;
-    }
+    margin: 0;
+}
+.gradient-logo .line1,
+.gradient-logo .line2 {
+    background: linear-gradient(90deg, #00AEEF ,#007BFF,#5244e9, #8A2BE2, #C134C8 );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 2.8rem;
+    font-weight: bold;
+}
+
+.gradient-logo .line1 {
+    margin-bottom: -0.8rem;
 }
 </style>
-<script>
-function gohome(){
-    location.href = "/home"
-}
-</script>

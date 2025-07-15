@@ -1,8 +1,12 @@
-body{
-    background-color: #F9F9F9;
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
-.container{
-    background-color: rgba(0, 0, 0, 0.4);
-    width: 60%;
-    margin: 5% auto;
+
+.form-container {
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 10px;
+    padding: 30px;
 }
