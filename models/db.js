@@ -29,6 +29,14 @@ email: {
 pass_word: {
     type: DataTypes.STRING,
     allowNull: false
+},
+isVerified: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+},
+verificationToken: {
+    type: DataTypes.STRING,
+    allowNull: false
 }
 });
 
@@ -41,8 +49,8 @@ name: {
     type: DataTypes.STRING,
     allowNull: false
 },
-photo: {
-    type: DataTypes.BLOB,
+photos: {
+    type: DataTypes.BLOB('long'),
     allowNull: false
 },
 location: {
@@ -63,8 +71,8 @@ anonymous: {
 /*(async () => {
   await sequelize.sync({ force: true }); // Use `force: true` apenas para testes (apaga e recria as tabelas)
 console.log('Tabelas sincronizadas!');
-})();
-*/
+})();*/
+
 
 module.exports = {
     sequelize,

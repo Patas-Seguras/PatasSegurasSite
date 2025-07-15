@@ -3,13 +3,16 @@ const express = require('express');
 //bcrypt export
 const bcrypt = require('bcrypt');
 ///exportar session
-const session = require('express-session')
+const session = require('express-session');
 //Modulo para chamar o html
 const http = require('http');
 // Rota querystring
 const querystring = require('querystring');
 // Módulo para chamar o Handlebars
 const { engine } = require('express-handlebars');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto')
+const upload = require('./config/multer.js');
 // export para chamar a rota
 var path = require('path');
 // Inicializa o Express
@@ -21,6 +24,7 @@ app.use('/css', express.static('./views/assets/css'));
 // Rota do JavaScript
 app.use('/js', express.static('./views/assets/js'));
 const  { Users, Complaint } = require('./models/db.js');
+const { title } = require('process');
 
 // Configuração do Handlebars
 app.engine('ejs', engine({
@@ -49,7 +53,15 @@ app.get('/register-page', (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-    res.render('home', { title: 'Patas Seguras' });
+    res.render('home', { title: 'Patas Seguras'});
+})
+
+app.get('/ong-map', (req, res) => {
+    res.render('ong-map', { title: 'Mapa das ONGS'});
+})
+
+app.get('/about', (req, res) => {
+    res.render('about', { title: 'Sobre o site'})
 })
 
 app.post('/register-page', async (req, res) => {
@@ -74,26 +86,65 @@ try {
     // Hashing da senha
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    //comando para criar usuario e enviar para o banco de dados
-    await Users.create({ email, pass_word: hashedPassword });
+    //esse codigo gera um token
+    const verificationToken = crypto.randomBytes(32).toString('hex');
 
-    res.status(201).render('home');
+
+    //comando para criar usuario e enviar para o banco de dados
+    await Users.create({ email,
+        pass_word: hashedPassword,
+        isVerified: false,
+        verificationToken
+});
+    //esse aqui é o nodemailer criando o transportador que é o email que envia o email pra conta etc
+    const transport = nodemailer.createTransport({
+        host: 'sandbox.smtp.mailtrap.io',
+        port: 2525,
+        auth: {
+            user: '7eb1b01fb6820e',
+            pass: '333ce8375ab709'
+        }
+    });
+
+    //aqui ta o link que o usuario clica pra verificação, nao tem muita funcionalidade já que isso nao tem login
+    const verificationLink = `http://localhost:8080/verify-email?token=${verificationToken}&email=${encodeURIComponent(email)}`;
+    
+    //isso aqui é o codigo pra enviar o email
+    await transport.sendMail({
+        from: 'patas.seguras@hotmail.com',
+        to: email,
+        subject: 'Aqui está o link para verificar sua conta do Patas Seguras!',
+        html: `<p>Clique no link para verificar seu e-mail: <a href="${verificationLink}">Verificar e-mail</a></p>`
+    })
+    res.status(201).redirect('home');
 } catch (error) {
     console.error('Erro ao registrar usuário:', error.message);
     res.status(500).send('Erro interno no servidor.');
 }
 });
 
-app.post('/complaint-page', async (req, res) => {
+/*app.get('/verify-email', async (req, res) =>{
+
+})*/
+app.post('/complaint-page', upload.single('photos'), async (req, res) => {
     try {
-        const {whichComplaint, name, photos, location, description, anonymous} = req.body;
+        const {whichComplaint, name, location, description, anonymous} = req.body;
+        const photos = req.file
 
         if(!whichComplaint || !location || !description){
             return res.status(400).send("Os campos obrigatórios precisam ser preenchidos.")
-        }
-        await Complaint.create({whichComplaint, name, photos, location, description, anonymous});
+        }else
+            await Complaint.create({
+                whichComplaint,
+                name,
+                photos: req.file?.buffer || null,
+                photoType: req.file?.mimetype || null,
+                location,
+                description,
+                anonymous: anonymous === 'on' || anonymous === 'true'
+            });
         
-        res.status(201).render('home');
+            res.status(201).render('home');
     } catch (error) {
         console.error('Erro no envio das denúncias: ', error.message);
         res.status(500).send('Erro interno no servidor, por favor retorne a tela anterior.')
