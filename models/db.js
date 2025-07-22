@@ -47,7 +47,7 @@ whichComplaint: {
 },
 name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
 },
 photos: {
     type: DataTypes.BLOB('long'),
