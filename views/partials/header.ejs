@@ -1,38 +1,38 @@
 <header class="header">
-    <div>
-        <h1 class="gradient-logo">
-            <span class="line1">PATAS</span>
-            <span class="line2">SEGURAS</span>
-        </h1>
+    <nav class="nav-container shadow-lg">
+        <div class="logo-box">
+            <img class="pata" src="../img/patasseguraslogo-branco.png" alt="logo" />
+        </div>
+        <div class="links-box">
+        <div class="link"><a href="/about">Sobre</a></div>
+        <div class="link"><a href="/home">Início</a></div>
+        <div class="link"><a href="/register-page">Registre-se</a></div>
+        <div class="link"><a href="/contact">Contato</a></div>
+        <div class="link"><a href="/ong-map">ONGs</a></div>
     </div>
-</header>
-<nav class="nav-container shadow-lg">
-    <div class="link"><a href="/about">Sobre</a></div>
-    <div class="link"><a href="/home">Início</a></div>
-    <div class="link"><a href="/register-page">Registre-se</a></div>
-    <div class="link"><a href="/contact">Contato</a></div>
-    <div class="link"><a href="/ong-map">ONGs</a></div>
 </nav>
+</header>
 <style>
-.header * {
-    margin: 0;
-}
-.header {
-    text-align: center;
-    background-color: #0d6efd;
-    margin-bottom: 0;
-}
 .nav-container {
     display: flex;
-    background-color: #fff;
-    justify-content: center;
-    gap: 2rem;
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #0d6efd;
+    padding: 1% 3%;
     flex-wrap: wrap;
-    padding: 1%;
+}
+
+.logo-box img {
+    height: 50px;
+}
+
+.links-box {
+    display: flex;
+    gap: 2rem;
 }
 
 .link a {
-    color: #333333;
+    color: #ffffff;
     text-decoration: none;
     font-weight: bold;
     font-size: 1.1rem;
@@ -44,24 +44,7 @@
 .link a:hover,
 .link a:focus {
     color: #0d6efd;
-    background: #e7f1ff ;
-}
-.gradient-logo {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-}
-.gradient-logo .line1,
-.gradient-logo .line2 {
-    background: linear-gradient(90deg, #00AEEF ,#007BFF,#5244e9, #8A2BE2, #C134C8 );
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-size: 2.8rem;
-    font-weight: bold;
+    background: #e7f1ff;
 }
 
-.gradient-logo .line1 {
-    margin-bottom: -0.8rem;
-}
 </style>
