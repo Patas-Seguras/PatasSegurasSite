@@ -1,0 +1,41 @@
+services:
+  web:
+    build: . # Constrói usando o Dockerfile no diretório atual
+    ports:
+      - "8080:8080" # Mapeia a porta 8080 do host para a porta 8080 do container
+    volumes:
+      - ./scr:/app/scr # Sincroniza a pasta local com o container
+      - /app/node_modules # Protege a pasta node_modules para que ela não seja sobrescrita
+    depends_on:
+      - db # Garante que o banco de dados inicie antes do serviço web
+    environment: 
+      DB_ENV: db
+      DB_USER: root
+      DB_PASSWORD: "senhaguto123" 
+      DB_NAME: patasseguras_db
+    restart: unless-stopped # Reinicia automaticamente, exceto se for parado manualmente
+    command: npm run dev
+
+  db:
+    image: mysql:8.0.42-debian
+    environment:
+      MYSQL_ROOT_PASSWORD: "senhaguto123" 
+      MYSQL_DATABASE: patasseguras_db
+    volumes:
+      - mysql_data:/var/lib/mysql # Persiste os dados do MySQL
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "8081:80"
+    command: -c "echo 'ServerName localhost' >> /etc/apache2/conf-enabled/servername.conf && apache2-foreground"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: "senhaguto123" 
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:
+    driver: local

@@ -1,0 +1,53 @@
+body {
+  background-image: url('../img/fundo.png');
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center; 
+  margin: 0; 
+}
+.container {
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 60%;
+  margin: 5% auto;
+}
+img{
+  border-radius: 1rem;
+}
+.itens {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 4%;
+}
+p {
+  color: white;
+}
+.botao {
+  width: 20%;
+  padding: 2% 3%;
+  cursor: pointer;
+  margin: auto;
+  transition: all 0.3s ease;
+}
+.botao:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 800px){
+  body{
+    background-size: 200vh;
+  }
+  .container{
+    font-size: x-small;
+  }
+  img{
+    border-radius: 5px;
+    width: 50px;
+  }
+  .botao{
+    font-size: smaller;
+    padding: 2% 4%;
+  }
+}

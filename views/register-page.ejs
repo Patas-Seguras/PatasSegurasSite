@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="css/register-page.css">
+<div class="container mt-5 p-1 bg-opacity shadow rounded-4">
+    <div class="row mt-5 mb-5 justify-content-center">
+        <div class="col-12 text-center">
+            <h2>Registre-se</h2>
+        </div>
+    </div>
+    <form method="POST" action="/register-page" enctype="application/x-www-form-urlencoded">
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <input type="email" class="form-control mb-3" id="email" name="email" placeholder="Digite seu Email">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <input type="password" class="form-control mb-3" id="password" name="password" placeholder="Digite sua senha">
+                <input type="password" class="form-control mb-3" id="passwordAgain" name="passwordAgain" placeholder="Digite seu senha novamente">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-5 mb-5">
+                <button type="submit" class="btn btn-primary active fw-bold" onclick="confirmar()">Registrar</button>
+            </div>
+        </div>
+    </form>
+</div>
+

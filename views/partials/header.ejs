@@ -1,0 +1,50 @@
+<header class="header">
+    <nav class="nav-container shadow-lg">
+        <div class="logo-box">
+            <img class="pata" src="../img/patasseguraslogo-branco.png" alt="logo" />
+        </div>
+        <div class="links-box">
+        <div class="link"><a href="/about">Sobre</a></div>
+        <div class="link"><a href="/home">Início</a></div>
+        <div class="link"><a href="/register-page">Registre-se</a></div>
+        <div class="link"><a href="/contact">Contato</a></div>
+        <div class="link"><a href="/ong-map">ONGs</a></div>
+    </div>
+</nav>
+</header>
+<style>
+.nav-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #0d6efd;
+    padding: 1% 3%;
+    flex-wrap: wrap;
+}
+
+.logo-box img {
+    height: 50px;
+}
+
+.links-box {
+    display: flex;
+    gap: 2rem;
+}
+
+.link a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    padding: 0.5rem;
+    border-radius: 3px;
+}
+
+.link a:hover,
+.link a:focus {
+    color: #0d6efd;
+    background: #e7f1ff;
+}
+
+</style>
