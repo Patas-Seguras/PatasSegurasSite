@@ -69,13 +69,12 @@ app.post('/register-page', async (req, res) => {
 try {
     const { email, password, passwordAgain } = req.body;
 
-    // Validação básica
+    // Validação básica do registro
     if (!email || !password || !passwordAgain) {
-        return res.status(400).send('Todos os campos são obrigatórios.');
+        return res.status(400).send('erro nos campos obrigatorios.');
     }
 
     if (password !== passwordAgain) {
-        console.error('Erro, as senhas não coincidem.')
         return res.status(400).send('As senhas não coincidem.');
     }
     // criando variavel de usuario exintente e usando o comando findone para varredura no banco de dados, onde se email for encontrado, dá erro
@@ -123,6 +122,7 @@ try {
 }
 });
 
+//sistema de verificação do email, preciso fazer ainda
 /*app.get('/verify-email', async (req, res) =>{
 
 })*/
@@ -130,10 +130,6 @@ app.post('/complaint-page', upload.single('photos'), async (req, res) => {
     try {
         const {whichComplaint, name, location, description, anonymous} = req.body;
         const photos = req.file
-
-        if(!whichComplaint || !location || !description){
-            return res.status(400).send("Os campos obrigatórios precisam ser preenchidos.")
-        }else
             await Complaint.create({
                 whichComplaint,
                 name,

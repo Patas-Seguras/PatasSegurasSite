@@ -51,7 +51,7 @@ name: {
 },
 photos: {
     type: DataTypes.BLOB('long'),
-    allowNull: false
+    allowNull: true
 },
 location: {
     type: DataTypes.STRING,
