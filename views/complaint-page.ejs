@@ -1,41 +1,42 @@
 <link rel="stylesheet" href="css/complaint-page.css">
-    <div class="d-flex align-items-center justify-content-center min-vh-100">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 mx-auto">
-                    <div class="form-container shadow-lg">
+<div class="d-flex align-items-center justify-content-center min-vh-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 mx-auto">
+                <div class="form-container shadow-lg">
                     <h1 class="text-center mt-1 text-black">Patas Seguras</h1>
                     <h2 class="text-center mb-4 text-black">Denuncie Aqui ↓</h2>
 
+                    <div id="errorMessage" class="alert alert-danger d-none" role="alert">
+                        </div>
+
                     <form method="post" class="form" action="/complaint-page" id="form" enctype="multipart/form-data">
-                        <!--Step 1-->
                         <div class="form-step">
                             <div class="mb-3">
                                 <label for="name" class="form-label fw-bolder text-black" id="lName">Seu nome</label>
                                 <input type="text" class="text-black form-control border-primary" id="name" name="name">
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input text-black border-primary" name="anonymous" id="anonymous">
-                                    <label class="form-check-label text-black" for="anonymous" >Desejo permanecer anônimo</label>
+                                    <label class="form-check-label text-black" for="anonymous">Desejo permanecer anônimo</label>
                                 </div>
                             </div>
-                        
+
                             <div class="mb-3">
                                 <label for="whichComplaint" class="form-label text-black fw-bolder">Qual o tipo de denuncia? <span style="color: red;">*</span></label>
                                 <select class="form-select text-black border-primary" id="whichComplaint" name="whichComplaint">
-                                    <option value="" class="text-center text-black" selected disabled hidden>Selecione</option>
-                                    <option class="text-center text-black" value="abandono">Abandono</option>
-                                    <option class="text-center text-black" value="violencia">Violência</option>
-                                    <option class="text-center text-black" value="ambienteInsalubre">Ambiente insalubre</option>
-                                    <option class="text-center text-black" value="faltadeAlimento">Falta de alimento/água</option>
-                                    <option class="text-center text-black" value="animaisSilvestres">Animais Silvestres em cativeiro</option>
-                                    <option class="text-center text-black" value="abuso">Abuso</option>
+                                    <option value="" class="text-left text-black" selected disabled hidden>Selecione</option>
+                                    <option class="text-left text-black" value="abandono">Abandono</option>
+                                    <option class="text-left text-black" value="violencia">Violência</option>
+                                    <option class="text-left text-black" value="ambienteInsalubre">Ambiente insalubre</option>
+                                    <option class="text-left text-black" value="faltadeAlimento">Falta de alimento/água</option>
+                                    <option class="text-left text-black" value="animaisSilvestres">Animais Silvestres em cativeiro</option>
+                                    <option class="text-left text-black" value="abuso">Abuso</option>
                                 </select>
                             </div>
                             <div class="text-end">
                                 <button type="button" class="btn btn-sm rounded-pill btn-primary mb-1 fw-bold next-step">Próximo</button>
                             </div>
                         </div>
-                        <!--step 2-->
                         <div class="form-step d-none">
                             <div class="mb-3">
                                 <label for="photo" class="form-label text-black fw-bolder">Campo para fotos do ocorrido:</label>
@@ -46,15 +47,14 @@
                                 <button type="button" class="btn btn-sm rounded-pill btn-primary mb-1 fw-bold next-step">Próximo</button>
                             </div>
                         </div>
-                        <!--step 3-->
                         <div class="form-step d-none">
                             <div class="mb-3">
                                 <label for="description" class="form-label fw-bolder text-black">Descreva o ocorrido<span style="color: red;">*</span></label>
                                 <textarea class="form-control text-black border-primary" name="description" id="description" rows="3" minlength="5" maxlength="450"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="location" class="form-label fw-bolder text-black">Localização do ocorrido <span style="color: red;">*</span></label>
-                                <input type="text" class="form-control text-black border-primary" id="localization" list="cities">
+                                <label for="localization" class="form-label fw-bolder text-black">Localização do ocorrido <span style="color: red;">*</span></label>
+                                <input type="text" class="form-control text-black border-primary" id="localization" name="localization" list="cities">
                                 <datalist id="cities">
                                     <option>Natal</option>
                                     <option>Mossoró</option>
@@ -73,4 +73,5 @@
             </div>
         </div>
     </div>
+</div>
 <script src="js/complaint-page.js"></script>

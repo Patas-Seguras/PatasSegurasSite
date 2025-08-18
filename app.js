@@ -4,7 +4,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 ///exportar session
 const session = require('express-session');
-//Modulo para chamar o html
+//Modulo para chamar o http
 const http = require('http');
 // Rota querystring
 const querystring = require('querystring');
@@ -128,14 +128,14 @@ try {
 })*/
 app.post('/complaint-page', upload.single('photos'), async (req, res) => {
     try {
-        const {whichComplaint, name, location, description, anonymous} = req.body;
+        const {whichComplaint, name, localization, description, anonymous} = req.body;
         const photos = req.file
             await Complaint.create({
                 whichComplaint,
                 name,
                 photos: req.file?.buffer || null,
                 photoType: req.file?.mimetype || null,
-                location,
+                localization,
                 description,
                 anonymous: anonymous === 'on' || anonymous === 'true'
             });
