@@ -53,7 +53,7 @@ photos: {
     type: DataTypes.BLOB('long'),
     allowNull: true
 },
-location: {
+localization: {
     type: DataTypes.STRING,
     allowNull: false
 },
