@@ -1,14 +1,19 @@
 const { name } = require('ejs');
 const { Sequelize, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize('patasseguras_db', 'root', '', {
-host: 'localhost',
-port: 3306,
-dialect: 'mysql',
-dialectOptions: {
-    connectTimeout: 60000 
-}
+const db_name = process.env.DB_NAME;
+const db_user = process.env.DB_ROOT;
+const db_password = process.env.DB_PASSWORD;
+const db_host = process.env.DB_HOST;
+
+const sequelize = new Sequelize(db_name, db_user, db_password, {
+    host: db_host,
+    dialect: 'mysql',
+    dialectOptions: {
+        connectTimeout: 60000 
+    }
 });
+
 
 (async () => {
 try {
