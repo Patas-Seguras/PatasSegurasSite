@@ -10,13 +10,19 @@ const http = require('http');
 const querystring = require('querystring');
 // Módulo para chamar o Handlebars
 const { engine } = require('express-handlebars');
+
 const nodemailer = require('nodemailer');
-const crypto = require('crypto')
+
+const crypto = require('crypto');
+
 const upload = require('./config/multer.js');
 // export para chamar a rota
 var path = require('path');
 // Inicializa o Express
 const app = express();
+
+require('dotenv').config();
+
 // Módulo para chamar o Bootstrap
 app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'));
 // Módulo da rota do CSS
@@ -33,8 +39,8 @@ app.engine('ejs', engine({
     layoutsDir: path.join(__dirname, 'views/layouts'), // Pasta dos layouts
     partialsDir: path.join(__dirname, 'views/partials'), // Pasta dos partials
 }));
-app.set('view engine', 'ejs'); // Define o mecanismo de visualização
-app.use('/img', express.static(path.join(__dirname, 'views/img')));
+app.set('view engine', 'ejs'); // isso define qual engine o express vai ler, podendo selecionar ejs ou handlebars
+app.use('/img', express.static(path.join(__dirname, 'views/img'))); //aqui ele ta definindo onde o express vai pegar os arquivos estaticos
 app.set('views', path.join(__dirname, '/views')); // Define o diretório das views
 app.use(express.static(path.join(__dirname, '/assets'))); // Pasta estática para assets
 app.use(express.json())
@@ -149,7 +155,7 @@ app.post('/complaint-page', upload.single('photos'), async (req, res) => {
 
 
 // Inicia o servidor
-const port = 8080;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log('Servidor iniciado na porta: ' + port);
 });
