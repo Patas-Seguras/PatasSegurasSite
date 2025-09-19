@@ -6,7 +6,7 @@ const session = require('express-session');
 
 const querystring = require('querystring');
 
-
+const { engine } = require('express-handlebars');
 
 var path = require('path');
 
@@ -17,9 +17,7 @@ const authRoutes = require('./views/src/routes/authRoutes.js'); // Importa as tu
 // Configuração de middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-app.set('ejs', ({
+app.engine('ejs', engine({
     extname: '.ejs', // Extensão dos arquivos Handlebars
     defaultLayout: 'main', // Layout padrão
     layoutsDir: path.join(__dirname, 'views/layouts'), // Pasta dos layouts
@@ -28,24 +26,22 @@ app.set('ejs', ({
 app.use('/bootstrap', express.static('./node_modules/bootstrap/dist'));
 app.use('/css', express.static('/public/css'));
 app.use('/js', express.static('/public/js'));
+app.set('view engine', 'ejs');
 app.use('/img', express.static(path.join(__dirname, 'public/img')));
+app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, '/public')));
 
 // As rotas de autenticação, agora de forma modular e organizada
 app.use('/', authRoutes);
 app.use('/', complaintRoutes);
 
-
+// As rotas que não estão em ficheiros separados
 app.get('/', (req, res) => {
     res.render('home', { title: 'Patas Seguras' });
 });
 
 app.get('/complaint-page', (req, res) => {
     res.render('complaint-page', { title: 'Página de denuncia' });
-}); 
-
-app.get('/dinamic-complaint-page', (req, res) => {
-    res.render('dinamic-complaint-page', { title: 'Página de denuncias' });
 });
 
 app.get('/register-page', (req, res) => {
