@@ -25,6 +25,10 @@ description: {
 anonymous: {
     type: DataTypes.BOOLEAN,
     defaultValue: true
+},
+status: {
+    type: DataTypes.ENUM('Ativa','Desativada', 'Concluída'),
+    defaultValue: 'Ativa'
 }
 });
 

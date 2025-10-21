@@ -31,4 +31,5 @@ console.log('Tabelas sincronizadas!');
 })();*/
 
 
+
 module.exports = sequelize;
