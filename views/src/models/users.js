@@ -11,13 +11,9 @@ pass_word: {
     type: DataTypes.STRING,
     allowNull: false
 },
-isVerified: {
+isAdmin: {
     type: DataTypes.BOOLEAN,
-    defaultValue: false
-},
-verificationToken: {
-    type: DataTypes.STRING,
-    allowNull: false
+    defaultValue: true
 }
 });
 
