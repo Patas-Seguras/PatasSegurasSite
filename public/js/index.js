@@ -1,4 +1,4 @@
 function redirecionar(){
-    window.location.href = "/complaint-page"
+    window.location.href = "/complaint-map"
     
 }

@@ -1,4 +1,3 @@
-const { name } = require('ejs');
 const { Sequelize, DataTypes } = require('sequelize');
 
 const db_name = process.env.DB_NAME;
