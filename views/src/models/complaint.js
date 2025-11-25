@@ -2,7 +2,11 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('./db')
 
 const complaint = sequelize.define('complaint', {
-whichComplaint: {
+animal: {
+    type: DataTypes.STRING,
+    allowNull: false
+},
+complaintType:{
     type: DataTypes.STRING,
     allowNull: false
 },
@@ -14,17 +18,13 @@ photos: {
     type: DataTypes.BLOB('long'),
     allowNull: true
 },
-localization: {
+location: {
     type: DataTypes.STRING,
     allowNull: false
 },
 description: {
     type: DataTypes.TEXT,
     allowNull: false
-},
-anonymous: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: true
 },
 status: {
     type: DataTypes.ENUM('Ativa','Desativada', 'Concluída'),

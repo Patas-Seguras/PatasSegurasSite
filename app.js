@@ -55,12 +55,8 @@ app.get('/', (req, res) => {
     res.render('home', { title: 'Patas Seguras' });
 });
 
-app.get('/complaint-page', (req, res) => {
-    res.render('complaint-page', { title: 'Página de denuncia' });
-});
-
-app.get('/dinamic-complaint-page', (req, res) => {
-    res.render('dinamic-complaint-page', { title: 'Página de denuncia' });
+app.get('/complaint-map', (req, res) => {
+    res.render('complaint-map', { title: 'Página de denuncia' });
 });
 
 app.get('/register-page', (req, res) => {
