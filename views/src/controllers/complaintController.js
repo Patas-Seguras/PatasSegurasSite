@@ -4,18 +4,18 @@ const upload = require('../config/multer.js');
 // A rota de denúncias
 const submitComplaint = async (req, res)  => {
     try {
-        const { animal, complaintType ,name, latitude, longitude, description, anonymous } = req.body;
+        const { animal, complaintType ,number, latitude, longitude, description } = req.body;
         const photos = req.file;
         const location = `${latitude}, ${longitude}`;
         await complaint.create({
-            animal,
-            complaintType,
-            name: anonymous === 'on' || anonymous === 'true'? 'Usúario Anônimo': name , 
+            animal: animal === '' ? 'Erro, o caso não foi registrado.': animal,
+            complaintType: complaintType === '' ? 'Erro, o tipo da denuncia não foi enviado.': complaintType,
+            number: number === ''? 'Erro, número não encontrado.': number , 
             photos: req.file?.buffer || null,
             photoType: req.file?.mimetype || null,
             location,
-            description: description === '' ? 'Sem descrição': description,
-            anonymous: anonymous === 'on' || anonymous === 'true'
+            description: description === '' ? 'Sem descrição.': description,
+
         });
 
         res.status(201).render('home');

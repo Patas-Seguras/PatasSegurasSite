@@ -10,9 +10,9 @@ complaintType:{
     type: DataTypes.STRING,
     allowNull: false
 },
-name: {
+number: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
 },
 photos: {
     type: DataTypes.BLOB('long'),
