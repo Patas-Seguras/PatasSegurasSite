@@ -110,13 +110,8 @@ async function showComplaintForm(lat, lng) {
                 <div id="errorMessage" class="alert alert-danger d-none" role="alert"></div>
 
                 <div class="mb-3">
-                    <label for="name" id="lName" class="form-label fw-bolder text-black">Seu nome</label>
-                    <input type="text" class="text-black form-control border-primary" id="name" name="name">
-
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input border-primary" name="anonymous" id="anonymous">
-                        <label class="form-check-label text-black" for="anonymous">Desejo permanecer anônimo</label>
-                    </div>
+                    <label for="number" id="lNumber" class="e form-label fw-bolder text-black">Seu número:</label>
+                    <input type="tel" class="text-black form-control border-primary" id="number" name="number">
                 </div>
 
                 <h3>Qual o animal:</h3>
@@ -184,23 +179,6 @@ async function showComplaintForm(lat, lng) {
 
     document.getElementById('complaintForm').addEventListener('submit', submitComplaint);
 
-    const checkbox = document.getElementById('anonymous');
-    const nameInput = document.getElementById('name');
-    const lNameInput = document.getElementById('lName');
-
-// Ouve a mudança no estado do checkbox para anônimo
-//com esse codigo consigo fazer com que se o checkbox estiver ativo ou checkado, a visibilidade dele muda
-//e com a logica acima, o que estiver escondido não terá atributos requiridos no caso o nome e o labelname
-    checkbox.addEventListener("change", () => {
-        if (checkbox.checked) {
-            nameInput.style.display = 'none';
-            lNameInput.style.display = 'none';
-            nameInput.value = '';
-        } else {
-            nameInput.style.display = 'block';
-            lNameInput.style.display = 'block';
-        }
-    });
 }
 //essa função funciona junto a div la do html errormessage
 //ela vai estar oculta e no momento em que o usuario errar alguma coisa ela adicionará a classe is invalid, onde mostrará a mensagem
@@ -225,14 +203,10 @@ function submitComplaint(event) {
 
     const animal = document.getElementById('animal').value;
     const type = document.getElementById('complaintType').value;
-    const nameInput = document.getElementById('name');
-    const anonymous = document.getElementById('anonymous').checked;
-// Expressão regular para validar nomes (movida para um escopo acessível)
-// Permite letras (incluindo acentuadas) e espaços
-    const reg = /^[a-zA-ZÀ-ú\s]+$/;
+    const numberInput = document.getElementById('number');
 
-    if (!anonymous && !reg.test(nameInput.value)) {
-        showErrorMessage("Por favor, insira um nome válido (sem números ou símbolos).");
+    if (!numberInput.value.trim()) {
+        showErrorMessage("Para evitar spam e trotes, precisamos validar que você é humano, para isso nos envie seu número.");
         return;
     }
 
