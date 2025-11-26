@@ -11,6 +11,8 @@ body {
   background-size: cover; 
   background-repeat: no-repeat;
   height: 60vh;
+  position: relative;
+  z-index: 20;
 }
 .titulo-fundo{
   color: white;
@@ -27,6 +29,8 @@ body {
   align-items: center;
   padding-bottom: 5rem;
   flex-direction: column;
+  position: relative;
+  z-index: 5;
 }
 .titulo-container-branco{
   color: rgb(0, 0, 0);
@@ -35,7 +39,7 @@ body {
   margin-top: 0,5rem;
 }
   .icones{
-    width: 11%;
+    width: 200px;
     height: auto;
     display: block;
     margin-bottom: 0;
@@ -58,18 +62,21 @@ img{
   padding: 5%;
   margin: 3% auto;
   width: 100%;
+  text-align: center;
 }
 p {
   color: rgb(0, 47, 255);
 }
 .botao {
-  width: 15%;
+  width: auto;
   padding: 1% 2%;
   align-items: center;
   cursor: pointer;
   transition: all 0.3s ease;
   background-color: #e78f0b;
   color: white;
+  border: none;
+  border-radius: 0.5rem;
 }
 .botao:hover {
   transform: translateY(-3px);
@@ -105,3 +112,25 @@ p {
   align-items: center;
   gap: 1rem; 
 }
+.sobre-container-branco
+body{
+    background-color: #f8f9fa;
+}
+.cartao{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.cartao div{
+    background-color: #0a63e0;
+}
+div p{
+    font-size: smaller;
+    color: rgb(253, 252, 253);
+  }
+  .sobre-container-branco{
+    color: rgb(7, 7, 7);
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 10rem;
+  }
