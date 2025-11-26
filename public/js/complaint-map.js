@@ -13,7 +13,7 @@ var pata = L.icon({
     popupAnchor: [0, -40]
 });
 
-function sucessCallback(position){
+function successCallback(position){
     const userLat = position.coords.latitude;
     const userLng = position.coords.longitude;
     
@@ -37,7 +37,7 @@ function errorCallback(error){
 if ("geolocation" in navigator) { //eu to pegando o navigator que o objeto do navegador do usuario e em seguinda escolhendo //
 // a opção de geolocalização com o metodo de getCurrent position. O metodo segue com 2 instancias de sucesso que é caso o usuario permita e uma opcional de erro caso aja aglgum erro
 //Dessa forma eu consigo pegar a localização do usuario e usar os valores e por em variaveis para poder manipular e conseguir fazer o mapa inicializar encima do usuario
-    navigator.geolocation.getCurrentPosition(sucessCallback, errorCallback, {
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
         enableHighAccuracy: true, //Esse valor booleano permite que minhas função receba com melhor presição a localização do usuario por isso, é possivel que demore mais que o normal para carrgar
         timeout: 10000,
         maximumAge: 0 
@@ -110,7 +110,9 @@ async function showComplaintForm(lat, lng) {
                 <div id="errorMessage" class="alert alert-danger d-none" role="alert"></div>
 
                 <div class="mb-3">
-                    <label for="number" id="lNumber" class="e form-label fw-bolder text-black">Seu número:</label>
+                <label for="name" id="lName" class="form-label fw-bolder text-black">Seu nome</label>
+                    <input type="text" class="text-black form-control border-primary" id="name" name="name">
+                    <label for="number" id="lNumber" class="form-label fw-bolder text-black">Seu número:</label>
                     <input type="tel" class="text-black form-control border-primary" id="number" name="number">
                 </div>
 
@@ -176,7 +178,6 @@ async function showComplaintForm(lat, lng) {
 
     document.getElementById('close-form').addEventListener('click', closeComplaintForm);
     document.getElementById('cancel-complaint').addEventListener('click', closeComplaintForm);
-
     document.getElementById('complaintForm').addEventListener('submit', submitComplaint);
 
 }
@@ -204,11 +205,20 @@ function submitComplaint(event) {
     const animal = document.getElementById('animal').value;
     const type = document.getElementById('complaintType').value;
     const numberInput = document.getElementById('number');
+    const nameInput = document.getElementById('name');
+// Expressão regular para validar nomes (movida para um escopo acessível)
+// Permite letras (incluindo acentuadas) e espaços
+    const reg = /^[a-zA-ZÀ-ú\s]+$/;
 
-    if (!numberInput.value.trim()) {
-        showErrorMessage("Para evitar spam e trotes, precisamos validar que você é humano, para isso nos envie seu número.");
+    if (!reg.test(nameInput.value)) {
+        showErrorMessage("⚠️ Por favor, insira um nome válido (sem números ou símbolos).");
         return;
     }
+    if (!numberInput.value.trim()) {
+        showErrorMessage("⚠️ Para evitar spam e trotes, precisamos validar que você é humano, para isso nos envie seu número.");
+        return;
+    }
+    
 
     if (!animal) {
         showErrorMessage("⚠️ Selecione o animal do caso.");
