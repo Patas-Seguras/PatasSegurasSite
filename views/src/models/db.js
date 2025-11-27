@@ -1,13 +1,14 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
 const db_name = process.env.DB_NAME;
-const db_user = process.env.DB_ROOT;
+const db_user = process.env.DB_USER;
 const db_password = process.env.DB_PASSWORD;
 const db_host = process.env.DB_HOST;
-
+const db_schema = process.env.DB_SCHEMA;
 const sequelize = new Sequelize(db_name, db_user, db_password, {
     host: db_host,
-    dialect: 'mysql',
+    dialect: 'postgres',
+    schema: db_schema,
     dialectOptions: {
         connectTimeout: 60000 
     }
@@ -15,11 +16,11 @@ const sequelize = new Sequelize(db_name, db_user, db_password, {
 
 (async () => {
 try {
-    console.log("Conectando ao MySQL...")
+    console.log("Conectando ao Postgres...")
     await sequelize.authenticate();
-    console.log('Conexão bem-sucedida ao MySQL via Sequelize!');
+    console.log('Conexão bem-sucedida ao Postgres via Sequelize!');
 } catch (error) {
-    console.error('Erro ao conectar ao MySQL:', error);
+    console.error('Erro ao conectar ao Postgres:', error);
 }
 })();
 

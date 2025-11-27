@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Users = require('../models/users'); 
 
@@ -25,7 +25,7 @@ const registerUser = async (req, res) => {
         }
 
         // Hashing da senha
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcryptjs.hash(password, 10);
 
         // Comando para criar usuário e enviar para o banco de dados
         await Users.create({
@@ -58,7 +58,7 @@ const loginUser = async (req, res) => {
             return res.status(422).json({ msg: 'Usuário não encontrado' });
         }
 
-        const passwordMatch = await bcrypt.compare(password, user.pass_word);
+        const passwordMatch = await bcryptjs.compare(password, user.pass_word);
         if (!passwordMatch) {
             return res.status(401).json({ msg: 'Senha incorreta' });
         }
