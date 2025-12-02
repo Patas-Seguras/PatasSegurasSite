@@ -10,8 +10,12 @@ const sequelize = new Sequelize(db_name, db_user, db_password, {
     dialect: 'postgres',
     schema: db_schema,
     dialectOptions: {
-        connectTimeout: 60000 
+    connectTimeout: 60000,
+    ssl: {
+        require: true,
+        rejectUnauthorized: false
     }
+}
 });
 
 (async () => {
