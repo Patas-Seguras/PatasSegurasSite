@@ -1,0 +1,136 @@
+body {
+  margin: 0; 
+}
+.container {
+  width: 60%;
+  margin: 5% auto;
+}
+.fundo {
+  padding: 1px;
+  background-image: url('../img/fundo2.png');
+  background-size: cover; 
+  background-repeat: no-repeat;
+  height: 60vh;
+  position: relative;
+  z-index: 20;
+}
+.titulo-fundo{
+  color: white;
+  text-align: center;
+  font-size: 3.5rem;
+  margin-top: 13%;
+  
+}
+.container-branco{
+  background-color: white;
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5rem;
+  flex-direction: column;
+  position: relative;
+  z-index: 5;
+}
+.titulo-container-branco{
+  color: rgb(0, 0, 0);
+  text-align: center;
+  font-size: 2.5rem;
+  margin-top: 0,5rem;
+}
+  .icones{
+    width: 200px;
+    height: auto;
+    display: block;
+    margin-bottom: 0;
+  }
+ .icones-centro {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+ }
+img{
+  border-radius: 1rem;
+}
+.itens {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 5%;
+  margin: 3% auto;
+  width: 100%;
+  text-align: center;
+}
+p {
+  color: rgb(0, 47, 255);
+}
+.botao {
+  width: auto;
+  padding: 1% 2%;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #e78f0b;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+}
+.botao:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgb(55, 55, 55);
+  background-color: #fab752;
+}
+
+@media (max-width: 800px){
+  body{
+    background-size: 200vh;
+  }
+  .container{
+    font-size: x-small;
+  }
+  img{
+    border-radius: 5px;
+    width: 30px;
+  }
+  .botao{
+    font-size: smaller;
+    padding: 2% 4%;
+    width: 20%;
+    padding: 2% 3%;
+    cursor: pointer;
+    margin:  0 auto;
+    transition: all 0.3s ease;
+    background-color: rgb(249, 249, 249);
+  }
+}
+.botoes-centro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem; 
+}
+.sobre-container-branco
+body{
+    background-color: #f8f9fa;
+}
+.cartao{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.cartao div{
+    background-color: #0a63e0;
+}
+div p{
+    font-size: smaller;
+    color: rgb(253, 252, 253);
+  }
+  .sobre-container-branco{
+    color: rgb(7, 7, 7);
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 10rem;
+  }
