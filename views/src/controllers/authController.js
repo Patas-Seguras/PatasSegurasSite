@@ -64,7 +64,7 @@ const loginUser = async (req, res) => {
         }
 
         // Geração do Token
-        const secret = process.env.SECRET || 'seu_segredo_padrao_muito_longo'; // Use seu fallback
+        const secret = process.env.SECRET; 
         
         const token = jwt.sign(
             { id: user.id }, // Assume user.id é o ID do Sequelize
