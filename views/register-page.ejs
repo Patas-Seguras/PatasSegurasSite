@@ -1,11 +1,13 @@
-<link rel="stylesheet" href="public/assets/css/register-page.css">
+<link rel="stylesheet" href="public/css/register-page.css">
+<link rel="stylesheet" href="public/css/popup.css">
+<!--Código-->
 <div class="container mt-5 p-1 bg-opacity shadow rounded-4">
     <div class="row mt-5 mb-5 justify-content-center">
         <div class="col-12 text-center">
             <h2>Registre-se</h2>
         </div>
     </div>
-    <form method="POST" action="/register-page" enctype="application/x-www-form-urlencoded">
+    <form method="POST" action="/register-page" id="registerForm" enctype="application/x-www-form-urlencoded">
         <div class="row justify-content-center">
             <div class="col-5">
                 <input type="email" class="form-control mb-3" id="email" name="email" placeholder="Digite seu Email">
@@ -24,4 +26,6 @@
         </div>
     </form>
 </div>
+<!--Aréa de scripts-->
+<script src="/js/register-page.js"></script>
 

@@ -9,19 +9,33 @@ const registerUser = async (req, res) => {
         const { email, password, passwordAgain } = req.body;
 
         if (!email) {
-            return res.status(422).json({ msg: 'O e-mail é obrigatório' });
+            return res.status(422).json({ 
+                success: false,
+                msg: 'O e-mail é obrigatório' 
+            });
         }
+
         if (!password) {
-            return res.status(422).json({ msg: 'A senha é obrigatória' });
+            return res.status(422).json({ 
+                success: false,
+                msg: 'A senha é obrigatória' 
+            });
         }
+        
         if (password !== passwordAgain) {
-            return res.status(422).json({ msg: 'As senhas não coincidem.' });
+            return res.status(422).json({ 
+                success: false,
+                msg: 'As senhas não coincidem.' 
+            });
         }
 
         // Verifica se o usuário já existe no banco de dados
         const existingUser = await Users.findOne({ where: { email } });
         if (existingUser) {
-            return res.status(422).json({ msg: 'Este e-mail já está registrado.' });
+            return res.status(422).json({ 
+                success: false,
+                msg: 'Este e-mail já está registrado.' 
+            });
         }
 
         // Hashing da senha
@@ -34,38 +48,55 @@ const registerUser = async (req, res) => {
             isAdmin: true
         });
 
-        
-        return res.status(201).json({ msg: 'Usuário registrado com sucesso.' });
+        return res.status(201).json({
+            success: true, 
+            msg: 'Usuário registrado com sucesso.' 
+        });
         
     } catch (error) {
         console.error('Erro ao registrar usuário:', error.message);
         
-        return res.status(500).json({ msg: 'Erro interno no servidor.' });
+        return res.status(500).json({
+            success: false, 
+            msg: 'Erro interno no servidor.' 
+        });
     }
 };
 
 // Login user
 const loginUser = async (req, res) => {
+
     try {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.status(422).json({ msg: 'O email e a senha são obrigatórios' });
+            return res.status(422).json({
+            success: false,
+            msg: 'Insira um email e senha.' 
+        });
         }
 
         const user = await Users.findOne({ where: { email } });
-        if (!user) {
-            return res.status(422).json({ msg: 'Usuário não encontrado' });
+
+        let passwordMatch = false;
+
+        if (user) {
+            passwordMatch = await bcryptjs.compare(password, user.pass_word);
         }
 
-        const passwordMatch = await bcryptjs.compare(password, user.pass_word);
         if (!passwordMatch) {
-            return res.status(401).json({ msg: 'Senha incorreta' });
+            return res.status(401).json({
+                success: false,
+                msg: 'Email ou senha incorretos' 
+            });
         }
 
         // Geração do Token
         const secret = process.env.SECRET; 
-        
+        if (!secret) {
+            console.error(' SECRET não configurada no .env');
+            return res.status(500).json({success:false, msg: 'Erro de configuração do servidor.' });
+        }
         const token = jwt.sign(
             { id: user.id }, // Assume user.id é o ID do Sequelize
             secret,
@@ -81,14 +112,22 @@ const loginUser = async (req, res) => {
         };
 
         // Resposta de sucesso ÚNICA (JSON com o token)
-        console.log(`Ùsuario ${user.email} autenticado com sucesso!`, token)
-        return res.redirect('/admin')
+        console.log(`O usuário ${user.email} foi autenticado`);
+        return res.status(200).json({
+            success: true,
+            msg: 'login realizado',
+            token: token,
+            redirect: '/admin'
+        })
         // A linha "res.redirect('/home')" foi removida daqui!
         
     } catch (error) {
         console.error('Erro ao fazer login:', error.message);
         // Garante que é uma resposta de erro única (500)
-        return res.status(500).json({ msg: 'Erro interno no servidor.' });
+        return res.status(500).json({ 
+            success: false,
+            msg: 'Erro interno no servidor.' 
+        });
     }
 };
 
