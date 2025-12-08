@@ -12,7 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "bcrypt": "^5.1.1",
+=======
+    "bcryptjs": "^3.0.3",
+>>>>>>> 3e115ac3225d33e2cc26d784b63984804a6b101c
     "body-parser": "^1.20.3",
     "bootstrap": "^5.3.3",
     "dotenv": "^17.2.1",
@@ -23,8 +27,13 @@
     "jsonwebtoken": "^9.0.2",
     "leaflet": "^1.9.4",
     "multer": "^2.0.1",
+<<<<<<< HEAD
     "mysql2": "^3.14.3",
     "nodemailer": "^7.0.4",
+=======
+    "nodemailer": "^7.0.4",
+    "pg": "^8.16.3",
+>>>>>>> 3e115ac3225d33e2cc26d784b63984804a6b101c
     "sequelize": "^6.37.5"
   },
   "repository": {

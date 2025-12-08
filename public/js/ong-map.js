@@ -4,6 +4,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
 }).addTo(map);
 
+<<<<<<< HEAD
 const estadoRN = {
   "type": "FeatureCollection",
   "features": [
@@ -1513,6 +1514,14 @@ var pata = L.icon({
     iconSize: [40, 40], // O tamanho da sua imagem [largura, altura]
     iconAnchor: [20, 40], // O ponto de 'âncora' onde o ícone se prende ao mapa
     popupAnchor: [0, -40] // O ponto onde o popup vai aparecer
+=======
+var pata = L.icon({
+    iconUrl: "img/patas-seguras-icone-mapa.png",
+
+    iconSize: [40, 40],
+    iconAnchor: [20, 40], 
+    popupAnchor: [0, -40] 
+>>>>>>> 3e115ac3225d33e2cc26d784b63984804a6b101c
 })
 const mark = [
     {
