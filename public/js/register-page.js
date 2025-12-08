@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-function voltar(){
-    window.location = "home.ejs";
-}
-=======
 document.addEventListener('DOMContentLoaded', () => {
     const registerForm = document.getElementById('registerForm');
 
@@ -75,4 +70,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
->>>>>>> 3e115ac3225d33e2cc26d784b63984804a6b101c
