@@ -21,7 +21,7 @@ const popupMessage = (message, type = 'success', duration = 2000) => {
     const alertClass = typeMap[type] || 'alert-info';
 
     const popup = document.createElement('div');
-    popup.className = `alert ${alertClass} alert-dismissible fade show popup`;
+    popup.className = `alert ${alertClass} w-auto alert-dismissible fade show popup`;
     popup.innerHTML = `
         <span class="popup-message">${message}</span>
         <button type="button" class="btn-close" onclick="closePopup()" aria-label="Close"></button>
