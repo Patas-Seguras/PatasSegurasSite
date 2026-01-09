@@ -1,17 +1,23 @@
 const { Sequelize, DataTypes } = require('sequelize');
+require('dotenv').config();
+const useLocal = process.env.USE_LOCAL_DB === '0';
 
-const db_name = process.env.DB_NAME;
-const db_user = process.env.DB_USER;
-const db_password = process.env.DB_PASSWORD;
-const db_host = process.env.DB_HOST;
-const db_schema = process.env.DB_SCHEMA;
-const sequelize = new Sequelize(db_name, db_user, db_password, {
-    host: db_host,
+const config = {
+    host: useLocal ? process.env.DB_HOST_LOCAL : process.env.DB_HOST_PROD,
+    database: useLocal ? process.env.DB_NAME_LOCAL : process.env.DB_NAME_PROD,
+    port: process.env.DB_PORT,
+    user: useLocal ? process.env.DB_USER_LOCAL : process.env.DB_USER_PROD,
+    password: useLocal ? process.env.DB_PASSWORD_LOCAL : process.env.DB_PASSWORD_PROD,
+    logging: false,
+};
+const sequelize = new Sequelize(config.database, config.user, config.password, {
+    host: config.host,
     dialect: 'postgres',
-    schema: db_schema,
+    schema: process.env.DB_SCHEMA,
+    logging: config.logging,
     dialectOptions: {
     connectTimeout: 60000,
-    ssl: {
+    ssl: useLocal? false: {
         require: true,
         rejectUnauthorized: false
     }
@@ -20,7 +26,7 @@ const sequelize = new Sequelize(db_name, db_user, db_password, {
 
 (async () => {
 try {
-    console.log("Conectando ao Postgres...")
+    console.log(`Conectando a: ${useLocal ? 'LOCAL' : 'RENDER'}`);
     await sequelize.authenticate();
     console.log('Conexão bem-sucedida ao Postgres via Sequelize!');
 } catch (error) {
