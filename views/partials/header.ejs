@@ -3,18 +3,42 @@
         <div class="logo-box">
             <img class="pata" src="/img/logo-pata-e-escudo-branco.png" alt="logo"/>
         </div>
-        <div class="links-box">
-                <div class="link"><a href="/about">Sobre</a></div>
-                <div class="link"><a href="/home">Início</a></div>
-                <div class="link"><a href="/admin">Painel Admin</a></div>
-                <div class="link"><a href="/contact">Contato</a></div>
-                <div class="link"><a href="/ong-map">ONGs</a></div>
-                <div class="link"><a href="/register-page">Registre-se</a></div>
-                <div class="link"><a href="/login-page">Login</a></div>
-            </div>
-</nav>
+        
+        <!--Aqui to criando um menu hamburguer que so aparecerá quando o @media for ativado-->
+        <button class="hamburger-menu" id="hamburgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <!-- Links da navbar -->
+        <div class="links-box" id="linksBox">
+            <div class="link"><a href="#about-us" class="scroll-link"">Sobre</a></div>
+            <div class="link"><a href="/home">Início</a></div>
+            <div class="link"><a href="/admin">Painel Admin</a></div>
+            <div class="link"><a href="/contact">Contato</a></div>
+            <div class="link"><a href="/ong-map">ONGs</a></div>
+            <div class="link"><a href="/register-page">Registre-se</a></div>
+            <div class="link"><a href="/login-page">Login</a></div>
+        </div>
+    </nav>
 </header>
+
 <style>
+/* ===== HEADER E NAV CONTAINER ===== */
+html {
+    scroll-behavior: smooth;
+}
+.header {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* z-index ta sendo usado assim pra garantir que ele fique acima de tudo e n bagunce nada */
+    z-index: 1000;
+    width: 100%;
+}
+
 .nav-container {
     display: flex;
     justify-content: space-between; 
@@ -22,15 +46,24 @@
     background-color: #0a4bff;
     padding: 1% 3%;
     flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* ===== LOGO ===== */
+.logo-box {
+    display: flex;
+    align-items: center;
 }
 
 .logo-box img {
     height: 50px;
+    width: auto;
 }
 
 .links-box {
     display: flex;
     gap: 2rem;
+    align-items: center;
 }
 
 .link a {
@@ -38,9 +71,10 @@
     text-decoration: none;
     font-weight: bold;
     font-size: 1.1rem;
-    transition: color 0.3s ease;
-    padding: 0.5rem;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0.75rem;
     border-radius: 3px;
+    white-space: nowrap;
 }
 
 .link a:hover,
@@ -49,4 +83,131 @@
     background: #e7f1ff;
 }
 
+.hamburger-menu {
+    display: none; /* Escondido por padrão (desktop) */
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    gap: 6px;
+    padding: 0.5rem;
+    order: 2; /* Posiciona no final */
+}
+
+.hamburger-menu span {
+    width: 25px;
+    height: 3px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+
+/* ===== MEDIA QUERIES ===== */
+
+@media (max-width: 767.98px) {
+    .nav-container {
+        padding: 1rem 1.5rem;
+    }
+    
+    .logo-box img {
+        height: 40px;
+    }
+    
+    /* Mostra o hamburger menu */
+    .hamburger-menu {
+        display: flex;
+    }
+    
+    .links-box {
+        display: none; /* Escondido por padrão */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #0a4bff;
+        flex-direction: column;
+        gap: 0;
+        padding: 1rem 0;
+        border-top: 2px solid #e7f1ff;
+        width: 100%;
+    }
+    
+    /* Mostra links quando hamburger está ativo */
+    .links-box.active {
+        display: flex;
+    }
+    .link {
+        width: 100%;
+    }
+    
+    .link a {
+        display: block;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 0;
+    }
+    
+    .link a:hover,
+    .link a:focus {
+        background: #036bfd;
+        color: #ffffff;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .links-box {
+        gap: 1rem;
+    }
+    
+    .link a {
+        font-size: 0.95rem;
+        padding: 0.4rem 0.5rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .nav-container {
+        padding: 1% 3%;
+    }
+    
+    .links-box {
+        gap: 2rem;
+    }
+    
+    .link a {
+        font-size: 1.1rem;
+    }
+}
 </style>
+
+<script>
+document.getElementById('hamburgerBtn').addEventListener('click', function() {
+    this.classList.toggle('active');
+
+    document.getElementById('linksBox').classList.toggle('active');
+});
+
+document.querySelectorAll('.link a').forEach(link => {
+    link.addEventListener('click', function() {
+        document.getElementById('hamburgerBtn').classList.remove('active');
+        document.getElementById('linksBox').classList.remove('active');
+    });
+});
+
+document.querySelector('a[href^="#"]').addEventListener('click', function(roll) {
+    roll.preventDefault()
+
+    const id = this.getAttribute('href');
+    const element = document.querySelector(id);
+
+    if(element){
+        element.scrollIntoView({
+            behavior: 'smooth', // Animação suave
+            block: 'start'
+        });
+        this.blur();
+    }
+})
+</script>

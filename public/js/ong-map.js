@@ -29,6 +29,12 @@ const mark = [
         coordinates: [-5.808722252272569, -35.212486993050156]
     }
 ]
+
+window.addEventListener('resize', function() {
+    if(map){
+        map.invalidateSize();
+    }
+})
 mark.forEach(point => {
 
     const markers = L.marker(point.coordinates, {icon: pata}).addTo(map);

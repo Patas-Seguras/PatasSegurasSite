@@ -3,5 +3,26 @@ body{
 }
 
 #map{
-    height: 200px;
+    height: 100%;
+    width: 100%;
+}
+
+@media (max-width: 576.98px) {
+    #map {
+        height: 1099px;
+    }
+}
+
+/* MOBILE GRANDE (481px até 768px) */
+@media (min-width: 576px) and (max-width: 768px) {
+    #map {
+        height: 1150px;
+    }
+}
+
+/* TABLET e DESKTOP (769px+) */
+@media (min-width: 992px) {
+    #map {
+        height: 1110px;
+    }
 }
