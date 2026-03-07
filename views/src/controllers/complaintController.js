@@ -1,21 +1,36 @@
-const complaint = require('../models/complaint.js')
-const upload = require('../config/multer.js');
+const complaint = require('../models/complaint.js');
 
-// A rota de denúncias
-const submitComplaint = async (req, res)  => {
+const submitComplaint = async (req, res) => {
     try {
-        const { animal, complaintType ,name, number, latitude, longitude, description} = req.body;
-        const photos = req.file;
-        const location = `${latitude}, ${longitude}`;
+        const {
+            animal,
+            complaintType,
+            name,
+            number,
+            email,
+            city,
+            address,
+            latitude,
+            longitude,
+            description
+        } = req.body;
+
+        const firstPhoto = Array.isArray(req.files) ? req.files[0] : null;
+        const location = latitude && longitude ? `${latitude}, ${longitude}` : null;
+
         await complaint.create({
-            animal: animal === '' ? 'Erro, o caso não foi registrado.': animal,
-            complaintType: complaintType === '' ? 'Erro, o tipo da denuncia não foi enviado.': complaintType,
-            name: name === '' ? 'Erro, usuário não encotrado.': name , 
-            number: number === ''? 'Erro, número não encontrado.': number , 
-            photos: req.file?.buffer || null,
-            photoType: req.file?.mimetype || null,
+            animal: animal || 'Não informado',
+            complaintType: complaintType || 'Não informado',
+            name: name || 'Não informado',
+            number: number || 'Não informado',
+            email: email || null,
+            city: city || null,
+            address: address || null,
+            photos: firstPhoto?.buffer || null,
+            photoType: firstPhoto?.mimetype || null,
             location,
-            description: description === '' ? 'Sem descrição.': description,
+            description: description || 'Sem descrição.',
+            status: 'Ativa'
         });
 
         res.status(201).render('home');
