@@ -1,1 +1,191 @@
-<h1> Oi aqui é privado </h1>
+<link rel="stylesheet" href="/css/admin-dashboard.css">
+
+<div class="container py-4 admin-dashboard">
+  <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-4">
+    <h1 class="mb-0">Painel Administrativo</h1>
+    <span class="badge bg-primary-subtle text-primary-emphasis px-3 py-2">Gestão de denúncias - Patas Seguras</span>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col-md-6 col-xl-3">
+      <div class="card stat-card border-0 shadow-sm">
+        <div class="card-body">
+          <h6 class="text-muted">Denúncias Recebidas</h6>
+          <p class="display-6 fw-bold mb-0"><%= stats.totalCount %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+      <div class="card stat-card border-0 shadow-sm">
+        <div class="card-body">
+          <h6 class="text-muted">Casos Pendentes</h6>
+          <p class="display-6 fw-bold mb-0 text-warning"><%= stats.pendingCount %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+      <div class="card stat-card border-0 shadow-sm">
+        <div class="card-body">
+          <h6 class="text-muted">Casos Resolvidos</h6>
+          <p class="display-6 fw-bold mb-0 text-success"><%= stats.resolvedCount %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3">
+      <div class="card stat-card border-0 shadow-sm">
+        <div class="card-body">
+          <h6 class="text-muted">Casos Urgentes</h6>
+          <p class="display-6 fw-bold mb-0 text-danger"><%= stats.urgentCount %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col-xl-6">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Denúncias nos Últimos Meses</h5>
+          <canvas id="monthlyChart" height="180"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Denúncias por Região</h5>
+          <canvas id="cityChart" height="180"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-2">
+      <div class="card border-0 shadow-sm mb-3">
+        <div class="card-body p-3">
+          <h6 class="mb-3">Ações Rápidas</h6>
+          <form action="/admin/nova-denuncia-teste" method="POST" class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-sm">Nova denúncia</button>
+            <a href="/admin?status=pendente" class="btn btn-warning btn-sm">Ver pendentes (<%= quickCounts.pending %>)</a>
+            <a href="/admin?status=urgente" class="btn btn-danger btn-sm">Ver urgentes (<%= quickCounts.urgent %>)</a>
+            <a href="/admin?status=resolvido" class="btn btn-success btn-sm">Ver resolvidos (<%= quickCounts.resolved %>)</a>
+          </form>
+        </div>
+      </div>
+      <div class="card border-0 shadow-sm emergency-card">
+        <div class="card-body p-3">
+          <h6>Contato de emergência</h6>
+          <p class="mb-1 fw-semibold">Telefone: xxx-xxx-xxx</p>
+          <small class="text-muted">Plantão 24h</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-body">
+      <h5 class="mb-3">Filtros</h5>
+      <form method="GET" action="/admin" class="row g-2">
+        <div class="col-md-3">
+          <select class="form-select" name="city">
+            <option value="">Cidade</option>
+            <% cityOptions.forEach((item) => { %>
+              <option value="<%= item %>" <%= filters.city === item ? 'selected' : '' %>><%= item %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select" name="status">
+            <option value="">Status</option>
+            <% Object.entries(statusLabels).forEach(([key, label]) => { %>
+              <option value="<%= key %>" <%= filters.status === key ? 'selected' : '' %>><%= label %></option>
+            <% }) %>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <input type="date" name="date" class="form-control" value="<%= filters.date || '' %>">
+        </div>
+        <div class="col-md-2">
+          <input type="text" name="animal" class="form-control" list="animals" placeholder="Animal" value="<%= filters.animal || '' %>">
+          <datalist id="animals">
+            <% animalOptions.forEach((item) => { %>
+              <option value="<%= item %>"></option>
+            <% }) %>
+          </datalist>
+        </div>
+        <div class="col-md-2 d-grid">
+          <button class="btn btn-outline-primary" type="submit">Filtrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card border-0 shadow-sm">
+    <div class="card-body">
+      <h5 class="mb-3">Denúncias Recentes</h5>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Animal</th>
+              <th>Cidade</th>
+              <th>Status</th>
+              <th>Data</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (complaints.length === 0) { %>
+              <tr><td colspan="6" class="text-center text-muted">Nenhuma denúncia encontrada.</td></tr>
+            <% } %>
+            <% complaints.forEach((complaint) => { %>
+              <tr>
+                <td><%= String(complaint.id).padStart(3, '0') %></td>
+                <td><%= complaint.animal %></td>
+                <td><%= complaint.city || 'Não informada' %></td>
+                <td><span class="badge bg-<%= complaint.badgeClass %>"><%= complaint.statusLabel %></span></td>
+                <td><%= new Date(complaint.createdAt).toLocaleDateString('pt-BR') %></td>
+                <td>
+                  <a href="/admin/denuncias/<%= complaint.id %>" class="btn btn-sm btn-outline-success">Ver</a>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const monthlyData = <%- JSON.stringify(monthlyData || []) %>;
+  const cityData = <%- JSON.stringify(cityData || []) %>;
+
+  new Chart(document.getElementById('monthlyChart'), {
+    type: 'line',
+    data: {
+      labels: monthlyData.map(item => item.label),
+      datasets: [{
+        label: 'Denúncias',
+        data: monthlyData.map(item => item.value),
+        borderColor: '#1d4ed8',
+        backgroundColor: 'rgba(29, 78, 216, 0.2)',
+        tension: 0.3,
+        fill: true
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+
+  new Chart(document.getElementById('cityChart'), {
+    type: 'doughnut',
+    data: {
+      labels: cityData.map(item => item.city),
+      datasets: [{
+        data: cityData.map(item => item.value),
+        backgroundColor: ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444', '#06b6d4']
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+</script>
