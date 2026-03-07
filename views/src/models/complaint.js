@@ -57,9 +57,9 @@ const complaint = sequelize.define('complaint', {
         allowNull: false
     },
     status: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM('pendente', 'em_analise', 'urgente', 'resolvido'),
         allowNull: false,
-        defaultValue: 'Ativa'
+        defaultValue: 'pendente'
     }
 }, {
     timestamps: true

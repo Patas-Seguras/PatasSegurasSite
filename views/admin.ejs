@@ -64,9 +64,9 @@
           <h6 class="mb-3">Ações Rápidas</h6>
           <form action="/admin/nova-denuncia-teste" method="POST" class="d-grid gap-2">
             <button type="submit" class="btn btn-primary btn-sm">Nova denúncia</button>
-            <a href="/admin?status=ativa" class="btn btn-warning btn-sm">Ver pendentes (<%= quickCounts.pending %>)</a>
+            <a href="/admin?status=pendente" class="btn btn-warning btn-sm">Ver pendentes (<%= quickCounts.pending %>)</a>
             <a href="/admin?status=urgente" class="btn btn-danger btn-sm">Ver urgentes (<%= quickCounts.urgent %>)</a>
-            <a href="/admin?status=concluida" class="btn btn-success btn-sm">Ver resolvidos (<%= quickCounts.resolved %>)</a>
+            <a href="/admin?status=resolvido" class="btn btn-success btn-sm">Ver resolvidos (<%= quickCounts.resolved %>)</a>
           </form>
         </div>
       </div>
@@ -157,11 +157,9 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script id="monthlyDataJson" type="application/json"><%- JSON.stringify(monthlyData || []) %></script>
-<script id="cityDataJson" type="application/json"><%- JSON.stringify(cityData || []) %></script>
 <script>
-    const monthlyData = JSON.parse(document.getElementById('monthlyDataJson').textContent || '[]');
-  const cityData = JSON.parse(document.getElementById('cityDataJson').textContent || '[]');
+  const monthlyData = <%- JSON.stringify(monthlyData || []) %>;
+  const cityData = <%- JSON.stringify(cityData || []) %>;
 
   new Chart(document.getElementById('monthlyChart'), {
     type: 'line',

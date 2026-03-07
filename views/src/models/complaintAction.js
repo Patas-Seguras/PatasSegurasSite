@@ -9,7 +9,7 @@ const ComplaintAction = sequelize.define('complaint_action', {
         field: 'denuncia_id'
     },
     status: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM('pendente', 'em_analise', 'urgente', 'resolvido'),
         allowNull: false
     },
     relatorio: {

@@ -4,43 +4,27 @@ const Message = require('../models/message');
 const ComplaintAction = require('../models/complaintAction');
 
 const STATUS_LABELS = {
-    ativa: 'Pendente',
-    desativada: 'Em análise',
-    concluida: 'Resolvido',
-    urgente: 'Urgente'
+    pendente: 'Pendente',
+    em_analise: 'Em análise',
+    urgente: 'Urgente',
+    resolvido: 'Resolvido'
 };
 
 const statusBadgeClass = {
-    ativa: 'warning',
-    desativada: 'primary',
+    pendente: 'warning',
+    em_analise: 'primary',
     urgente: 'danger',
-    concluida: 'success'
-};
-
-const DB_STATUS_MAP = {
-    ativa: 'Ativa',
-    desativada: 'Desativada',
-    urgente: 'Urgente',
-    concluida: 'Concluída'
+    resolvido: 'success'
 };
 
 const normalizeStatus = (status) => {
-    if (!status) return 'ativa';
-
-    const normalized = String(status)
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .trim()
-        .toLowerCase();
-
-    if (['pendente', 'ativa'].includes(normalized)) return 'ativa';
-    if (['em_analise', 'desativada', 'em analise'].includes(normalized)) return 'desativada';
-    if (['resolvido', 'concluida', 'concluída'].includes(normalized)) return 'concluida';
-    if (normalized === 'urgente') return 'urgente';
-
-    return 'ativa';
+    if (!status) return 'pendente';
+    if (['Ativa', 'Desativada', 'Concluída'].includes(status)) {
+        if (status === 'Concluída') return 'resolvido';
+        return 'em_analise';
+    }
+    return status;
 };
-
 
 const ensureSupportTables = async () => {
     await Message.sync();
@@ -55,7 +39,7 @@ const getDashboard = async (req, res) => {
         const where = {};
 
         if (city) where.city = city;
-        if (status) where.status = DB_STATUS_MAP[normalizeStatus(status)] || 'Ativa';
+        if (status) where.status = status;
         if (animal) where.animal = { [Op.iLike]: `%${animal}%` };
         if (date) {
             where[Op.and] = [literal(`DATE("complaint"."createdAt") = DATE('${date}')`)];
@@ -73,9 +57,9 @@ const getDashboard = async (req, res) => {
             animals
         ] = await Promise.all([
             Complaint.count(),
-            Complaint.count({ where: { status: 'Concluída' } }),
-            Complaint.count({ where: { status: 'Ativa' } }),
-            Complaint.count({ where: { status: 'Urgente' } }),
+            Complaint.count({ where: { status: 'resolvido' } }),
+            Complaint.count({ where: { status: 'pendente' } }),
+            Complaint.count({ where: { status: 'urgente' } }),
             Complaint.findAll({
                 where,
                 order: [['createdAt', 'DESC']],
@@ -192,13 +176,12 @@ const updateComplaintStatus = async (req, res) => {
             return res.status(404).send('Denúncia não encontrada.');
         }
 
-        const normalizedStatus = normalizeStatus(status);
-        await complaint.update({ status: DB_STATUS_MAP[normalizedStatus] || 'Ativa' });
+        await complaint.update({ status });
 
         if (relatorio && relatorio.trim()) {
             await ComplaintAction.create({
                 denunciaId: complaint.id,
-                status: normalizedStatus,
+                status,
                 relatorio: relatorio.trim(),
                 adminEmail: req.session.users?.email || 'admin@local'
             });
@@ -249,7 +232,7 @@ const createTestComplaint = async (req, res) => {
             city: 'Natal',
             address: 'Rua Exemplo, 123',
             description: 'Animal preso sem água em quintal descoberto.',
-            status: 'Ativa'
+            status: 'pendente'
         });
 
         return res.redirect('/admin');

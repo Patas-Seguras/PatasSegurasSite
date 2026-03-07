@@ -30,7 +30,7 @@ const submitComplaint = async (req, res) => {
             photoType: firstPhoto?.mimetype || null,
             location,
             description: description || 'Sem descrição.',
-            status: 'Ativa'
+            status: 'pendente'
         });
 
         res.status(201).render('home');
