@@ -1,0 +1,32 @@
+.admin-dashboard {
+  color: #1f2937;
+}
+
+.admin-dashboard h1,
+.admin-dashboard h5,
+.admin-dashboard h6 {
+  color: #0f3d75;
+}
+
+.admin-dashboard .stat-card {
+  border-left: 4px solid #3b82f6;
+  background: linear-gradient(145deg, #ffffff, #f0f7ff);
+}
+
+.admin-dashboard .emergency-card {
+  background: #eff6ff;
+  border-left: 4px solid #2563eb;
+}
+
+.admin-dashboard .table thead th {
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+.admin-dashboard .card {
+  border-radius: 0.75rem;
+}
+
+.admin-dashboard canvas {
+  max-height: 240px;
+}
