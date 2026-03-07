@@ -204,10 +204,12 @@ document.querySelector('a[href^="#"]').addEventListener('click', function(roll) 
 
     if(element){
         element.scrollIntoView({
-            behavior: 'smooth', // Animação suave
+            behavior: 'smooth', 
             block: 'start'
         });
         this.blur();
+    } else{
+        window.location.href = '/home';
     }
 })
 </script>
