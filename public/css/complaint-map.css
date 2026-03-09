@@ -231,9 +231,9 @@
 .btn-cancel:hover {
     background: #e0e0e0;
 }
-    @media (max-width: 576.98px) {
+    @media (max-width: 1000.98px) {
         #complaint-map {
-            height: 1099px;
+            height: 2000px;
         }
         .complaint-form-sidebar {
         position: fixed;
@@ -268,17 +268,17 @@
     }
 
     .complaint-btn .icon, .animal-btn .icon {
-        font-size: 18px;
+        font-size: 40px;
     }
 
     #complaint-description {
-        min-height: 60px;
-        font-size: 11px;
+        min-height: 90px;
+        font-size: 30px;
     }
 
     .btn-submit, .btn-cancel {
-        font-size: 12px;
-        padding: 8px;
+        font-size: 30px;
+        padding: 10px;
     }
     }
     
