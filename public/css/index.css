@@ -122,7 +122,7 @@
 
 /* ===== MEDIA QUERIES ===== */
 
-/* MOBILE (até 576px) */
+
 @media (max-width: 576.98px) {
     .btn-hero{
         padding: 25px;
@@ -140,7 +140,6 @@
     }
 }
 
-/* TABLET (576px - 768px) */
 @media (min-width: 576px) and (max-width: 767.98px) {
     .about1 > div, .about2 > div, .about3 > div {
         padding: 25px;

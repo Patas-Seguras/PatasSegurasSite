@@ -231,7 +231,6 @@
 .btn-cancel:hover {
     background: #e0e0e0;
 }
-    /* MOBILE (até 576px) */
     @media (max-width: 576.98px) {
         #complaint-map {
             height: 1099px;
@@ -283,7 +282,6 @@
     }
     }
     
-    /* TABLET (576px - 768px) */
     @media (min-width: 576px) and (max-width: 767.98px) {
         #complaint-map {
             height: 1150px;

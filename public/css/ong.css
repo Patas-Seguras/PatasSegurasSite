@@ -13,14 +13,12 @@ body{
     }
 }
 
-/* MOBILE GRANDE (481px até 768px) */
 @media (min-width: 576px) and (max-width: 768px) {
     #map {
         height: 1150px;
     }
 }
 
-/* TABLET e DESKTOP (769px+) */
 @media (min-width: 992px) {
     #map {
         height: 1110px;

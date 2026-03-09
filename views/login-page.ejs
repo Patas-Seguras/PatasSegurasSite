@@ -1,37 +1,32 @@
 <link rel="stylesheet" href="css/login-page.css">
 <link rel="stylesheet" href="css/popup.css">
 
-<div class="container-fluid login-container min-vh-100 d-flex align-items-center justify-content-center">
+<div class="container-fluid login-container d-flex align-items-center justify-content-center">
 
-    <div class="shadow login-container2 p-3 p-sm-4 rounded-4 w-100" style="max-width: 500px;">
-        <div class="row mb-4">
-            <div class="col-12 text-center">
-                <h2 class="mb-3 fs-4 fs-md-3">Bem-vindo de volta</h2>
-            </div>
+    <div class="login-container2 shadow rounded-4 w-100">
+
+        <div class="text-center mb-4">
+            <h2>Bem-vindo de volta</h2>
         </div>
+
         <form method="POST" action="/login-page" id="loginForm" enctype="application/x-www-form-urlencoded">
 
-            <div class="row mb-3">
-                <div class="col-12">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu Email">
-                </div>
+            <div class="mb-3">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu Email">
             </div>
-            
 
-            <div class="row mb-4">
-                <div class="col-12">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha">
-                </div>
+            <div class="mb-4">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha">
             </div>
-            
 
-            <div class="row">
-                <div class="col-12">
-                    <button type="submit" class="btn btn-primary btn-lg w-100" style="min-height: 50px;" onclick="logar()">Entrar</button>
-                </div>
-            </div>
+            <button type="submit" class="btn btn-primary btn-lg w-100" onclick="logar()">
+                Entrar
+            </button>
+
         </form>
+
     </div>
+
 </div>
 
 <script src="/js/login-page.js"></script>
